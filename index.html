@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שו״ת יחדיו - שאלות ותשובות מאת הרב אייל ורד</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap');
+
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2d5f8a;
+    --accent: #c9a84c;
+    --accent-light: #f0e4c4;
+    --bg: #faf8f4;
+    --card-bg: #ffffff;
+    --text: #2c2c2c;
+    --text-light: #5a5a5a;
+    --border: #e8e0d4;
+    --q-bg: #f0f4f8;
+    --a-bg: #f9f7f2;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Heebo', 'Arial', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  .header h1 {
+    font-family: 'Frank Ruhl Libre', 'Heebo', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .header .subtitle {
+    font-size: 1.3rem;
+    font-weight: 300;
+    opacity: 0.9;
+    position: relative;
+  }
+
+  .header .date-range {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    opacity: 0.75;
+    position: relative;
+  }
+
+  .header .ornament {
+    position: relative;
+    display: inline-block;
+    margin: 1rem 0 0.5rem;
+    color: var(--accent);
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .toc {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .toc h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .toc a {
+    color: var(--primary-light);
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s;
+    font-size: 0.95rem;
+  }
+
+  .toc a:hover {
+    background: var(--q-bg);
+    color: var(--primary);
+  }
+
+  .toc .toc-num {
+    background: var(--primary);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .toc .toc-count {
+    color: var(--text-light);
+    font-size: 0.8rem;
+    margin-right: auto;
+  }
+
+  .category {
+    margin-bottom: 2.5rem;
+  }
+
+  .category-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 1.2rem 1.8rem;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .category-header h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .category-header .cat-num {
+    background: rgba(255,255,255,0.2);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .qa-list {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .qa-item {
+    padding: 1.5rem 1.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .qa-item:last-child { border-bottom: none; }
+
+  .qa-date {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.15rem 0.7rem;
+    border-radius: 20px;
+    margin-bottom: 0.7rem;
+  }
+
+  .qa-question {
+    background: var(--q-bg);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+    border-right: 4px solid var(--primary-light);
+  }
+
+  .qa-question::before {
+    content: 'שאלה:';
+    display: block;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .qa-answer {
+    background: var(--a-bg);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    border-right: 4px solid var(--accent);
+  }
+
+  .qa-answer::before {
+    content: 'תשובה:';
+    display: block;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .header { background: white !important; color: var(--primary) !important; border-bottom: 3px solid var(--primary); }
+    .header::before { display: none; }
+    .header h1 { text-shadow: none; }
+    .header .subtitle, .header .date-range, .header .ornament { color: var(--text-light); }
+    .toc { break-after: page; }
+    .category { break-inside: avoid; }
+    .qa-item { break-inside: avoid; }
+    .category-header { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .container { max-width: 100%; }
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.8rem; }
+    .header .subtitle { font-size: 1rem; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .qa-item { padding: 1rem; }
+    .container { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="ornament">&#10040; &#10040; &#10040;</div>
+  <h1>שו״ת יחדיו</h1>
+  <div class="subtitle">שאלות ותשובות מאת הרב אייל ורד</div>
+  <div class="date-range">תקופה: נובמבר 2025 &ndash; מרץ 2026 &nbsp;|&nbsp; עדכון אחרון: 21.03.2026</div>
+</div>
+
+<div class="container">
+
+<!-- Table of Contents -->
+<nav class="toc">
+  <h2>תוכן עניינים</h2>
+  <div class="toc-grid">
+    <a href="#cat1"><span class="toc-num">1</span> כשרות - בשר וחלב <span class="toc-count">(20)</span></a>
+    <a href="#cat2"><span class="toc-num">2</span> כשרות - כללי <span class="toc-count">(7)</span></a>
+    <a href="#cat3"><span class="toc-num">3</span> כשרות - בדיקת חרקים ותוצרת <span class="toc-count">(4)</span></a>
+    <a href="#cat4"><span class="toc-num">4</span> כשרות - טבילת כלים <span class="toc-count">(4)</span></a>
+    <a href="#cat5"><span class="toc-num">5</span> כשרות - זכוכית <span class="toc-count">(2)</span></a>
+    <a href="#cat6"><span class="toc-num">6</span> כשרות - הפרשת חלה <span class="toc-count">(4)</span></a>
+    <a href="#cat7"><span class="toc-num">7</span> ברכות <span class="toc-count">(7)</span></a>
+    <a href="#cat8"><span class="toc-num">8</span> שבת <span class="toc-count">(16)</span></a>
+    <a href="#cat9"><span class="toc-num">9</span> תפילה <span class="toc-count">(10)</span></a>
+    <a href="#cat9b"><span class="toc-num">10</span> תפילה - קריאת מגילה <span class="toc-count">(1)</span></a>
+    <a href="#cat10"><span class="toc-num">11</span> חנוכה <span class="toc-count">(10)</span></a>
+    <a href="#cat11"><span class="toc-num">12</span> מזוזה <span class="toc-count">(3)</span></a>
+    <a href="#cat12"><span class="toc-num">13</span> צדקה ומעשרות <span class="toc-count">(4)</span></a>
+    <a href="#cat13"><span class="toc-num">14</span> לשון הרע ורכילות <span class="toc-count">(1)</span></a>
+    <a href="#cat14"><span class="toc-num">15</span> הלכות שונות <span class="toc-count">(33)</span></a>
+  </div>
+</nav>
+
+<!-- Category 1: כשרות - בשר וחלב -->
+<section class="category" id="cat1">
+  <div class="category-header">
+    <span class="cat-num">1</span>
+    <h2>כשרות - בשר וחלב</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">21.03.2026</span>
+      <div class="qa-question">צלחת פורצלן לא בן יומו חלבית שאכלו עליה אתמול עוף. מה דינה?</div>
+      <div class="qa-answer">שוטפים וזהו.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">30.01.2026</span>
+      <div class="qa-question">חלות שנאפו בתנור בשרי עם תבנית חלבית ולהיפך - האם יש בעיה?</div>
+      <div class="qa-answer">אין בעיה בחלות. התבנית טרף ויש ללבנה ליבון קל. החלות בסדר. וגם התבנית. את התנור יש להכשיר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.01.2026</span>
+      <div class="qa-question">מחבת שנטרפה, האם מספיק ליבון קל, ואם כן איך עושים?</div>
+      <div class="qa-answer">ליבון קל עושים על הגז. שמים את המחבת הפוך על הלהבה הכי גדולה עד שזה חם מאוד.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.01.2026</span>
+      <div class="qa-question">בלנדר ידני בשרי לשימוש במרק חם פרווה בכלי חלבי לא בן יומו - מותר?</div>
+      <div class="qa-answer">כאשר מדובר בכלי שאינו בן יומו מותר גם לאשכנזים להכין בו מאכל פרווה על מנת לאוכלו עם המין השני. נתינת הטעם היא טעם פגום ולכן זה לא אוסר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">16.01.2026</span>
+      <div class="qa-question">תבנית זכוכית שהיתה בשימוש פעם אחת בתנור חלבי (שלא בן יומו) עם מאכל פרווה. האם מותר להשתמש בה בתנור בשרי (שגם הוא אינו בן יומו)?</div>
+      <div class="qa-answer">מותר. (הבהרה: כאשר מדובר בכלי שאינו בן יומו מותר גם לאשכנזים לכתחילה לאכול מאכל פרווה שנעשה בכלי הזה יחד עם המין השני. הטעם פגום וזה גם נותן טעם בר נותן טעם.)</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">05.01.2026</span>
+      <div class="qa-question">מאכל בשרי שחומם במיקרו עם מכסה פלסטיק חלבי, מה הדין?</div>
+      <div class="qa-answer">את המכסה יש להגעיל. כל השאר בסדר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">24.12.2025</span>
+      <div class="qa-question">האם אפשר להכשיר מחבת/סיר בליבון קל גם כשהכלי בן יומו?</div>
+      <div class="qa-answer">כן. אם מלבנים אין בעיה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">22.12.2025</span>
+      <div class="qa-question">איך אפשר להשתמש בבית במכשיר מיקרוגל אחד גם לבשרי וגם לחלבי?</div>
+      <div class="qa-answer">עדיף מאוד לא להשתמש באותו כלי. מיקרו או תנור גם לחלבי וגם לבשרי. זה מתכון לתקלות רבות. אם אין ברירה ניתן לחמם על ידי שני כיסויים. קופסא אטומה. ועוד כיסוי מעליה כמו הכיסוי פלסטיק של המיקרו.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">22.12.2025</span>
+      <div class="qa-question">כוס חלבית כנראה בת יומה, שחומם בה שוקולד פרווה במיקרוגל בשרי בן יומו, ואחר כך השוקולד נאפה בתנור חלבי בן יומו?</div>
+      <div class="qa-answer">בדיעבד הכל מותר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">20.12.2025</span>
+      <div class="qa-question">מאכל פרווה שהוכן בכלי בשרי - מה הדין?</div>
+      <div class="qa-answer">לאשכנזים אכן אסור לכתחילה לבשל מאכל פרווה בכלי בשרי על מנת לאוכלו עם חלבי אפילו אם הכלי אינו בן יומו. אך אם נעשה כבר אז מותר יהיה לאוכלו יחד עם חלבי הואיל והכלי לא בן יומו. אך אם הכלי בן יומו אין לאוכל יחד אך יהיה מותר זה אחר זה. ולספרדים גם בבן יומו מותר לכתחילה להכין ולאכול יחד.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">15.12.2025</span>
+      <div class="qa-question">ערבבתי עם כף בשרית פתיתים פרווה במחבת חלבית, מה דין הכלים והפתיתים?</div>
+      <div class="qa-answer">המחבת בסדר. וגם הפתיתים. הכף צריכה הגעלה לחומרא. (תלוי אם בן יומו)</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">15.12.2025</span>
+      <div class="qa-question">כדורי פלאפל פרווה שתוגנו בשמן פרווה אבל שמו אותם בשקית עם מלקחיים של שווארמה - האם הפלאפל בשרי?</div>
+      <div class="qa-answer">לא. הוא נשאר פרווה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">03.12.2025</span>
+      <div class="qa-question">מרק פרווה שבושל בסיר בשרי שאינו בן יומו - מותר לאכול בסעודה חלבית?</div>
+      <div class="qa-answer">מרק פרווה שבושל בסיר בשרי שאינו בן יומו מותר גם לאשכנזים לאכול אותו בסעודה חלבית.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">27.11.2025</span>
+      <div class="qa-question">האם מותר לי, כשאני בשרי, לאכול לחם שחומם בטוסטר חלבי שלא השתמשו בו למאכלי חלב ב-24 השעות האחרונות?</div>
+      <div class="qa-answer">גם לאשכנזים מותר לכתחילה לאכול מאכל פרווה שהוכן בכלי חלבי שאינו בן יומו לאחר שאכלו מאכל בשרי. אך לא יחד עם בשר. ואילו לספרדים מותר לאכול אפילו יחד עם בשר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">26.11.2025</span>
+      <div class="qa-question">טוסטר בשרי שאינו בן יומו שהתחילו להכין בו טוסט חלבי וחתיכת גבינה קטנה נגעה בתבנית?</div>
+      <div class="qa-answer">מספיק לחמם את הטוסטר (יותר ממה שהיתה חמה).</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">25.11.2025</span>
+      <div class="qa-question">כף שהכינו בה בצהרים מרק עוף ובטעות כעת הכניסו לסיר פסטה פרווה, מה דין הפסטה?</div>
+      <div class="qa-answer">מותר יהיה לאכול את הפסטה עם חלבי לאחר שהוכנסה הכף. כאשר הוכנס כלי בשרי בן יומו למאכל פרווה, לספרדים מותר לכתחילה, לאשכנזים רק בדיעבד. כאן טעיתם והכנסתם כף בשרית בת יומה אך נקיה למאכל פרווה. בדיעבד זה מותר. יש לצרף שיש בפסטה הרבה יותר מפי שישים מהטעם הבלוע בכף.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">25.11.2025</span>
+      <div class="qa-question">סיר בשרי שהתחלנו לחמם בו תערובת חלבית וגילינו לפני שהגיע לחום שהיד סולדת בו, התערובת טרפה?</div>
+      <div class="qa-answer">שני טעמים להקל. הטעם פגום (הסיר לא בן יומו) וגם לא הספיק להפלט החוצה כי עדיין לא חומם.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">25.11.2025</span>
+      <div class="qa-question">מדיח כלים - האם צריך לנקות את המסנן בין בשרי לחלבי?</div>
+      <div class="qa-answer">מדיח כלים פועל על מים חמים וחומר ניקוי וממילא פוגם לחלוטין את כל הטעם שנותר בשיירי המאכל. ולכן אין צורך לנקות את המסנן.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">25.11.2025</span>
+      <div class="qa-question">מיקסר לתערובות חלביות לא חמות ובצק חלבי לא חם - ישאר פרווה?</div>
+      <div class="qa-answer">כן. זה עדיין ישאר פרווה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">23.11.2025</span>
+      <div class="qa-question">האם מותר להשתמש בטוסטר גם לבשרי וגם לחלבי אם שמה נייר אפייה ומחכה 24 שעות?</div>
+      <div class="qa-answer">טוסטר הוא מכשיר שנשארים בו פירורים רבים ושאריות גבינה והאוכל בא במגע ישיר עם המכשיר עצמו ולכן אין להשתמש בטוסטר גם לחלבי וגם לבשרי.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 2: כשרות - כללי -->
+<section class="category" id="cat2">
+  <div class="category-header">
+    <span class="cat-num">2</span>
+    <h2>כשרות - כללי</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">20.03.2026</span>
+      <div class="qa-question">תבניות חד פעמיות העשויות מאלומניום צריכות כשרות?</div>
+      <div class="qa-answer">לא צריכות כשרות כלל.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">20.03.2026</span>
+      <div class="qa-question">מוצרי חד פעמי מנייר (כמו כוסות חמות) צריכות כשרות?</div>
+      <div class="qa-answer">הן צריכות הכשר כי הן מודבקות ומצופות.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">31.01.2026</span>
+      <div class="qa-question">שוקולד שכתוב עליו "ללא כשרות" - האם להסב תשומת ליבם של קרובי משפחה?</div>
+      <div class="qa-answer">כן. כדאי.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">27.01.2026</span>
+      <div class="qa-question">האם מותר להשתמש במי פה ללא הכשר? סירופ תרופה עם טעם?</div>
+      <div class="qa-answer">כל דבר מאכל שיש לו טעם, גם טעם חריף כמו מנטה צריך הכשר. אך כדורי ויטמינים ללא טעם כלל אין צריכים הכשר. גם מי פה שאסור לבלוע - אם יש להם טעם עדיין צריך כשרות בשל הנאת החיך.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">22.12.2025</span>
+      <div class="qa-question">פחית קולה עם כיתוב בערבית זה כשר?</div>
+      <div class="qa-answer">אם אין על זה את אחד מסימני הכשרות הידועים k או ou אז אין לשתות.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">16.12.2025</span>
+      <div class="qa-question">האם מותר להשתמש בחו"ל בתנור?</div>
+      <div class="qa-answer">צריך לנקותו ולהכשירו. כמו לפסח. ותבניות חד פעמיות.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.11.2025</span>
+      <div class="qa-question">תרופה ללא טעם - צריכה כשרות?</div>
+      <div class="qa-answer">אם אין לזה טעם אז זה לא צריך כשרות.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 3: כשרות - בדיקת חרקים ותוצרת -->
+<section class="category" id="cat3">
+  <div class="category-header">
+    <span class="cat-num">3</span>
+    <h2>כשרות - בדיקת חרקים ותוצרת</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">20.03.2026</span>
+      <div class="qa-question">האם צריך לשמור תבלינים במקפיא כדי לשמור עליהם מחרקים?</div>
+      <div class="qa-answer">לא חייב.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">29.01.2026</span>
+      <div class="qa-question">עציצי תבלין נענע - יש חשש מבחינת כשרות חרקים?</div>
+      <div class="qa-answer">אין. שישימו מסננת לפני שמוזגים לתה. כשמגדלים נענע שוטפים אותה כרגיל וקונים מסננת טובה ואז מוזגים את המים לתוך קומקום עם הנענע ושוב מוזגים דרך המסננת.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">26.11.2025</span>
+      <div class="qa-question">ברוקולי וכרובית - האם ניתן לבדוק בבדיקה ביתית?</div>
+      <div class="qa-answer">קשה לבדוק אותם בבית. ולכן כדאי לקנות מהחברות הידועות. עלי, בודק וכו.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">15.12.2025</span>
+      <div class="qa-question">מטע אבוקדו של חבר חילוני - צריך לחשוש לבעיות?</div>
+      <div class="qa-answer">זהו חשש רחוק. וגם אם חלילה נקטף בשבת ודאי נעשה על ידי תאילנדים. ולכן אין מניעה לקנות ממנו אבוקדו.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 4: כשרות - טבילת כלים -->
+<section class="category" id="cat4">
+  <div class="category-header">
+    <span class="cat-num">4</span>
+    <h2>כשרות - טבילת כלים</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">18.01.2026</span>
+      <div class="qa-question">קרש חלה מזכוכית - חייבת להטביל?</div>
+      <div class="qa-answer">קרש חלה אינו כלי בישול או אחסון או אכילה ולכן פטור מטבילה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">25.12.2025</span>
+      <div class="qa-question">קניתי לצוות בעבודה ספלים - צריך לטבול?</div>
+      <div class="qa-answer">טבילת כלים היא חובה על בעל הכלי. בעל חנות שקונה סחורה לא צריך להטביל לפני מכירה. (אם שילמת מכספך ותקבל החזר - כרגע אתה בעל הכלי).</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">11.01.2026</span>
+      <div class="qa-question">האם כלי מלמין מצריך טבילה?</div>
+      <div class="qa-answer">מלמין הוא סוג של פלסטיק לצורך העניין ופטור מטבילה. מטבילים רק מתכת וזכוכית.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">05.01.2026</span>
+      <div class="qa-question">קומקום חשמלי חדש במשרד - אפשר להשתמש?</div>
+      <div class="qa-answer">אפשר. ובהזדמנות ראשונה תטבילי אותו.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 5: כשרות - זכוכית -->
+<section class="category" id="cat5">
+  <div class="category-header">
+    <span class="cat-num">5</span>
+    <h2>כשרות - זכוכית</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">01.02.2026</span>
+      <div class="qa-question">צלחות מזכוכית במשרד שלא השתמשו בהם שנה ולא יודעים מה חלבי ומה בשרי?</div>
+      <div class="qa-answer">זכוכית לחלק גדול מהדעות לא בולעת ולכן אפשר לעשות בהן שימוש לשני הדברים.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">27.01.2026</span>
+      <div class="qa-question">האם אפשר להשתמש בכלי זכוכית גם לחלבי וגם לבשרי בהחלפת מיכל?</div>
+      <div class="qa-answer">כן.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 6: כשרות - הפרשת חלה -->
+<section class="category" id="cat6">
+  <div class="category-header">
+    <span class="cat-num">6</span>
+    <h2>כשרות - הפרשת חלה</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">05.02.2026</span>
+      <div class="qa-question">האם אפשר לצרף שני בצקים מסוגים שונים להפרשת חלה?</div>
+      <div class="qa-answer">כל חמשת מיני דגן מצטרפים זה לזה לחיוב חלה אם מצרפים אותם בשלב הבצק.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">30.01.2026</span>
+      <div class="qa-question">האם אפשר להפריש חלה בברכה מ-1.600 קילו?</div>
+      <div class="qa-answer">לרוב הדעות הפרשה מכמות כזו היא ללא ברכה. כדאי להוסיף עוד 600 גרם ואז מתחייבים בברכה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">17.12.2025</span>
+      <div class="qa-question">בצק לספינג' שמטגנים כולו - צריך הפרשת חלה?</div>
+      <div class="qa-answer">לספרדים כאשר מכינים בצק על מנת לטגנו כולו הוא פטור מהפרשת חלה. אך אם מתכוונים לאפות אפילו חלק קטן מהבצק אז כל העיסה מתחייבת. לאשכנזים נהגו להפריש בלי ברכה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">17.12.2025</span>
+      <div class="qa-question">על בצק שהופרשה ממנו חלה מותר לטגן?</div>
+      <div class="qa-answer">ברגע שהופרשה חלה ניתן לעשות מה שרוצים.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 7: ברכות -->
+<section class="category" id="cat7">
+  <div class="category-header">
+    <span class="cat-num">7</span>
+    <h2>ברכות</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">01.02.2026</span>
+      <div class="qa-question">האם על תות שדה מברכים שהחיינו?</div>
+      <div class="qa-answer">על ירקות לא נהגו לברך שהחיינו בעיקר בגלל שהם נמצאים כל השנה בשל החממות. אך תות שדה נמצא בעיקר בחורף. ושמחים בו. ולכן יש לברך עליו שהחיינו.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">01.02.2026</span>
+      <div class="qa-question">האם ניתן לברך שהכל על בירה לפני היין כדי לכסות גם שעורה של שבעת המינים?</div>
+      <div class="qa-answer">זה יהיה ברכה שאינה צריכה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">01.02.2026</span>
+      <div class="qa-question">לגבי שבעת המינים - אם ברכו על הלחם?</div>
+      <div class="qa-answer">אם ברכו על הלחם אז זה טפל לפת ולא מברכים בנפרד.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">28.01.2026</span>
+      <div class="qa-question">אם אדם התחייב בברכת על המחיה, ושתה יין פחות מכשיעור, האם יכול להזכיר בעל המחיה גם על הגפן?</div>
+      <div class="qa-answer">יש מעלה שהברכה תהיה כמה שיותר מדויקת ומפורטת. במקרה זה יש חיוב ברור ללא ספק מצד על המחיה כך שאין בעיה של הזכרת שם ה'. ודאי ראוי להוסיף את ההודאה על הגפן אף שהייתה פחות מהשיעור.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">13.01.2026</span>
+      <div class="qa-question">מה מברכים על דייסת סולת?</div>
+      <div class="qa-answer">זה תלוי בעובי שלה. אם היא עבה מברכים עליה מזונות. אך אם היא דלילה כמו משקה אז שהכל.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">05.01.2026</span>
+      <div class="qa-question">איזו ברכה לברך כשפוגשים גדול בישראל (הרב לאו)?</div>
+      <div class="qa-answer">שחלק מחכמתו ליראיו. על תלמיד חכם גדול שהוא נושא דבר היהדות והיה רב ראשי ודאי מברכים בשם ומלכות.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">26.11.2025</span>
+      <div class="qa-question">עלי טורטיה - מה מברכים?</div>
+      <div class="qa-answer">עלי טורטיה תלוי ממה עשויים. אם זה מקמח תירס זה שהכל. ואם מקמח חיטה זה המוציא. לא שונה מפיתה דקה כי זה אפוי ולא מטוגן. יש כאלו שמברכים מזונות כי זה דק אך לדעתי צודקים האומרים שיש לברך על זה המוציא.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 8: שבת -->
+<section class="category" id="cat8">
+  <div class="category-header">
+    <span class="cat-num">8</span>
+    <h2>שבת</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">20.03.2026</span>
+      <div class="qa-question">סיכום דברי תורה בשבת - מותר?</div>
+      <div class="qa-answer">סיכום דברי תורה נחשב מלאכה לצורך דבר האבד שהרי אם לא נסכם עלולים לשכוח. אך סיכום פסקאות אינו הכרחי שהרי הפסקה קיימת בספר ולכן אין לכתוב לצורך כך.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">06.02.2026</span>
+      <div class="qa-question">האם יש איסור לפתוח מקרר בשבת משום שאולי יעלו המעלות ויצטרך להפעיל את עצמו?</div>
+      <div class="qa-answer">לרוב המקררים היום יש מנגנון שבת שמנתק את כל התגובות הללו. אך גם במקררים ישנים הדבר מותר מפני שזה ספק פסיק רישא בדרבנן שלא אכפת ליה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">29.01.2026</span>
+      <div class="qa-question">האם פעולת סינון נענע מותרת בשבת?</div>
+      <div class="qa-answer">לרוב הדעות אם המים בקומקום צלולים ולא ניכר לכלוך או תולעים בעין אז אין מניעה לשוב ולסנן את הנוזל.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">25.01.2026</span>
+      <div class="qa-question">הלכות בורר בשבת בגרעינים שחורים?</div>
+      <div class="qa-answer">מותר בשבת לברור אוכל מתוך פסולת. כל מה שאני לא חפץ בו יחשב פסולת. בתוך מין אחד לא שייך ברירה. יש לקחת מה שאתה רוצה (אוכל מתוך פסולת). אם בדרך לגרעינים המלאים אתה צריך להזיז קליפות זה מותר כי זה דרך אכילה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.01.2026</span>
+      <div class="qa-question">חציה של כביש בשבת כשרכב מתקרב - יש איסור?</div>
+      <div class="qa-answer">כביש חוצים רק כשבטוח. ממילא אף נהג לא אמור לעצור. מכל מקום אין לחשוש לזה שתגרמו לו לעצור. הוא בכל מקרה נוהג. מחלל שבת כל רגע דאורייתא.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">17.01.2026</span>
+      <div class="qa-question">אזעקת אש בבניין בליל שבת - האם לענות לטלפון ממוקד הכבאות?</div>
+      <div class="qa-answer">מענה לטלפון בשבת זה איסור דרבנן קל. ניידת כבאות שמוזעקת אלייך ללא צורך חסרה כעת במקום אחר שאולי יהיה בה צורך אמיתי. ולכן כאשר מדובר באזעקת שווא יש לענות לטלפון ולומר שאין צורך שיגיעו.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">10.01.2026</span>
+      <div class="qa-question">מרק קר על פלטה שתידלק רק במהלך השבת - יש איסור?</div>
+      <div class="qa-answer">הרב עובדיה מתיר זאת לכתחילה מפני שהחימום נעשה בגרמא. ובצירוף דעת הרמב"ם שאין כלל בישול אחר בישול. עצם הנחת המרק על הפלטה כאשר היא כבויה על מנת שיתחמם אחר כך ודאי מותרת בשעת צורך.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">09.01.2026</span>
+      <div class="qa-question">הפסקת חשמל - האם מותר לשים על הפלטה אוכל מבושל? אם החשמל יחזור בשבת מותר לאכול?</div>
+      <div class="qa-answer">מותר. תיקון החשמל הוא פיקוח נפש. כשיחזור החשמל ניתן להנות ממנו. ההנאה כאן היא מאוכל שחומם אך לא בושל על ידי הפלטה. וממילא הוא היה ראוי לאכילה גם ללא החשמל.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">09.01.2026</span>
+      <div class="qa-question">מותר לשים תבנית תנור על להבת גז ולשים אוכל עליה כמו על פלטה?</div>
+      <div class="qa-answer">נכון מאוד. זוהי ודאי אש גרופה וקטומה שניתן להשהות עליה מערב שבת. עדיף שהכפתורים יהיו מכוסים.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">09.01.2026</span>
+      <div class="qa-question">גוי של שבת יכול להעביר את המקרר למצב שבת?</div>
+      <div class="qa-answer">כן.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">05.01.2026</span>
+      <div class="qa-question">אחות שעושה משמרות בבית חולים בשבת ונוסעת - יכולה להתארח לשבת במקום שיגרום לנסיעה ארוכה יותר?</div>
+      <div class="qa-answer">כן. הנסיעה אל העבודה מותרת ואין משמעות למרחק. אחרת היינו מבקשים מכל אחות לגור קרוב.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">28.11.2025</span>
+      <div class="qa-question">האם ואיך מותר להכין בשבת משקה חם מחליטת צמחים?</div>
+      <div class="qa-answer">החשש הוא שהם חלק מקלי הבישול שמתבשלים אף בכלי שני ולכן העצה הכי טובה היא לעשות את זה בכלי שלישי. כלומר מהמיחם לקומקום. ומקומקום לעוד קומקום ואז לשים בו את העלים. כלי שלישי לא מבשל לכולי עלמא.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">22.11.2025</span>
+      <div class="qa-question">האם מותר במוצ"ש לדבר עם נציג שירות במוקד באמריקה שאצלם עדיין שבת?</div>
+      <div class="qa-answer">אם הוא גוי ודאי מותר. ומן הסתם הוא גוי.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">22.11.2025</span>
+      <div class="qa-question">האם מותר למלא סבון נוזלי במתקן בשבת?</div>
+      <div class="qa-answer">לא נראה שיש בזה בעיה כלשהיא.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">21.11.2025</span>
+      <div class="qa-question">האם מותר להכניס ילד בן שנתיים לבריכה של הקטנים במלון בשבת?</div>
+      <div class="qa-answer">הכנסת ילד קטן לבריכה בשבת עלולה להיות כרוכה באיסורי תורה של סחיטת הבגדים שלו ועוד כמה ענינים. ולכן יש להימנע.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">14.12.2025</span>
+      <div class="qa-question">האם אפשר להסתכל במצלמות אבטחה שדולקות 24/7 בשבת?</div>
+      <div class="qa-answer">(לא תשובה ישירה, אך נשאל בהקשר חנוכה)</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 9: תפילה -->
+<section class="category" id="cat9">
+  <div class="category-header">
+    <span class="cat-num">9</span>
+    <h2>תפילה</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">16.02.2026</span>
+      <div class="qa-question">באמצע תפילת עמידה ראיתי שנפל שטר למתפלל - מותר להפסיק?</div>
+      <div class="qa-answer">העוסק במצווה כלומר עומד ומדבר עם המלך פטור ממצווה אחרת של השבת אבידה. אפילו נחש כרוך בעקיבו לא מפסיק. טוב עשית שסימנת. ואם היה הולך היה עליך להרים את השטר ולהחזירו לאחר שמונה עשרה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">04.02.2026</span>
+      <div class="qa-question">האם צריך להשתמש במספריים קרמיות כדי לחתוך ציצית?</div>
+      <div class="qa-answer">לא. אין צורך. (הרחבה: מהפסוק "כי חרבך הנפת עליה ותחללה" - שאין לחתוך ציציות בסכין אלא בשיניים. עיקר ההקפדה היא על סכין ולא על מספריים.)</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">28.01.2026</span>
+      <div class="qa-question">שמגיעה בשבת בבוקר בזמן קריאת התורה - להשלים תפילה או להצטרף לקריאה?</div>
+      <div class="qa-answer">זה לא עניין של מותר או אסור אלא עדיפות אישית. לכאורה יש עדיפות לשמיעת הקריאה בתורה שהיא מין תלמוד תורה ציבורי.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">27.01.2026</span>
+      <div class="qa-question">חתן שזהו יום חתונתו - מה המנהג לגבי תחנון?</div>
+      <div class="qa-answer">חתן שזהו יום חתונתו לא אומרים תחנון גם אם הוא אורח.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.01.2026</span>
+      <div class="qa-question">כשצריך להתפלל לפני הנץ - האם יש עניין להתפלל כמה שיותר סמוך לנץ?</div>
+      <div class="qa-answer">תפילה בנץ אין משמעה הנץ האסטרונומי. אלא רק נץ הנראה. ולכן תפילה בנץ נחשב ככזו עשר דקות לפני או אחרי הנץ האסטרונומי. אך בטווחי הזמן שאתה מציין - אין הבדל. זה אחרי זמן טלית ותפילין ואחרי עלות השחר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">17.01.2026</span>
+      <div class="qa-question">שבת אולפנא - בצאת שבת עשו הבדלה ואחר כך התפללנו ערבית - האם לומר אתה חוננתנו?</div>
+      <div class="qa-answer">כן. יש לומר אתה חוננתנו בתפילה גם אם עשו הבדלה לפני כן. זו רק תוספת ואין לה סיומת של ברכה בפני עצמה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">13.01.2026</span>
+      <div class="qa-question">תפילין - הגיע מתפלל ששכח תפילין, האם לתת לו תפילין רבנו תם?</div>
+      <div class="qa-answer">הנחת תפילין רבנו תם איננה רק מחמת הספק אלא יש להם יסוד מהר סיני. אך לא מברכים על תפילין אלו אלא רק על תפילין של רש"י. ובנוסף אם אין לו תפילין אז החובה היא קודם כל על ידי תפילין של רש"י. יש להמתין עד אחרי קדושה ולהעביר לו תפילין רש"י.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">03.01.2026</span>
+      <div class="qa-question">אם אני מתפלל בנוסח אשכנז והמניין בנוסח ספרד - מה לעשות בקדושה?</div>
+      <div class="qa-answer">כאשר מתפללים בנוסח שונה מהנוסח הפרטי שלך, בכל החלקים הציבוריים יש להתפלל בנוסח של הקהל. ולכן את נוסח הקדושה יש לומר כמו הקהל. אך את תפילות הלחש והפרטיות יש לעשות בנוסח האישי שלך.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">08.12.2025</span>
+      <div class="qa-question">על ציצית מברכים מייד כשלובשים?</div>
+      <div class="qa-answer">על ציצית מברכים מייד כשלובשים. אלא כאשר עוברים לשים טלית ואז מברכים על הטלית ופוטרים את הציצית.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">20.11.2025</span>
+      <div class="qa-question">אבל - האם ניגש לתפילה בראש חודש?</div>
+      <div class="qa-answer">המנהג הוא שאבל ניגש בראש חודש אך לא בהלל.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 9b: תפילה - קריאת מגילה -->
+<section class="category" id="cat9b">
+  <div class="category-header">
+    <span class="cat-num">10</span>
+    <h2>תפילה - קריאת מגילה</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">28.01.2026</span>
+      <div class="qa-question">האם ניתן לקרוא מגילה במשרד בימים לפני פורים?</div>
+      <div class="qa-answer">בשולחן ערוך סימן תרפ"ח פסק שכאשר לא ניתן לקרוא מגילה בזמנה ניתן לקרוא אותה החל מי"א אדר אך ללא ברכה. ולכן בהחלט זו יוזמה מקסימה לקרוא מגילה במקום העבודה אך ללא ברכה.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 10: חנוכה -->
+<section class="category" id="cat10">
+  <div class="category-header">
+    <span class="cat-num">11</span>
+    <h2>חנוכה</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">21.12.2025</span>
+      <div class="qa-question">נרות משעווה שדלקו פחות מחצי שעה - יצאתי ידי חובה?</div>
+      <div class="qa-answer">להלכה מכיוון שהם ראויים לדלוק חצי שעה והדלקה עושה מצווה אין צורך להדליק שנית.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">22.12.2025</span>
+      <div class="qa-question">שמן שנותר מנרות חנוכה - מותר להשתמש לנרות שבת?</div>
+      <div class="qa-answer">כל השמן שנותר אחרי עבור חצי שעה מההדלקה אינו מוקצה למצוותו וניתן להשתמש בו למצווה אחרת כגון נרות שבת.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.12.2025</span>
+      <div class="qa-question">הדלקת נרות במוצ"ש חנוכה?</div>
+      <div class="qa-answer">ההדלקה היא רק אחרי זמן צאת שבת. מי שנוהג רבנו תם גם במוצ"ש חנוכה. בני הבית נגררים אחר בעל הבית.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.12.2025</span>
+      <div class="qa-question">האם מותר להשתמש בשמן שנשאר לטובת הדלקת נרות שבת?</div>
+      <div class="qa-answer">מותר. השמן המוקדש למצווה הוא רק השמן הדולק בחצי שעה ראשונה. מותר השמן הוא חולין ויפה להמשיך לעשות בו מצווה נוספת.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.12.2025</span>
+      <div class="qa-question">הדלקת חנוכה - איפה אם לא ישן בבית?</div>
+      <div class="qa-answer">בבית שלך.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.12.2025</span>
+      <div class="qa-question">אם מדליק לחמתי וגם בבית - יכול לברך פעמיים?</div>
+      <div class="qa-answer">כן. נשים חייבות בנר חנוכה שאף הן היו באותו הנס. כשאתה מדליק לחמתך זה מדין ערבות. ושוב אתה מדליק בביתך על החיוב שלך.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">16.12.2025</span>
+      <div class="qa-question">כמה צריך לטרוח כדי לקיים מצוות הדלקת נרות בזמנה?</div>
+      <div class="qa-answer">הזמן נמשך עד שתכלה רגל מן השוק. ודאי שיש לחכות לבני הבית כל עוד אנחנו תחת זמן זה. אך ראוי להשתדל להתקרב לזמן המקורי. עדיף הדלקה סביב 21 ולא לדחות לשעה מאוחרת.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">14.12.2025</span>
+      <div class="qa-question">האם אבל יכול להיות שליח ציבור בחנוכה?</div>
+      <div class="qa-answer">חנוכה לא שונה מראש חודש. אבל יכול לגשת לתפילות אך לא בהלל.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">14.12.2025</span>
+      <div class="qa-question">כוסיות שמן זית ריקות לאחר חנוכה - לפח או בדרך כבוד?</div>
+      <div class="qa-answer">ראוי בדרך כבוד.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">13.12.2025</span>
+      <div class="qa-question">מיקום הנחת מנורת החנוכה - קומה 12?</div>
+      <div class="qa-answer">אם רואים את המנורה מתוך הבית אז יש עדיפות במרפסת כפרסום הנס למרפסות ממול.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">09.12.2025</span>
+      <div class="qa-question">הדלקת נרות חנוכה בבית הכנסת לפני שחרית - בברכה?</div>
+      <div class="qa-answer">לפני שחרית ודאי לא מברכים.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 11: מזוזה -->
+<section class="category" id="cat11">
+  <div class="category-header">
+    <span class="cat-num">12</span>
+    <h2>מזוזה</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">18.01.2026</span>
+      <div class="qa-question">מזוזה במעלית - חייבים לקבוע?</div>
+      <div class="qa-answer">מעלית מעיקר הדין פטורה ממזוזה. ראשית לא בגודל מחייב (2 מ' על 2 מ'). שנית זו דירה נעה. שלישית לא משמשת למגורים. ולכן פטורה. וגם מי שמחמיר ושם אין לו לברך.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">08.12.2025</span>
+      <div class="qa-question">(תמונה של פתח) - צריך מזוזה?</div>
+      <div class="qa-answer">חיוב מזוזה הוא רק בחדר של 2 מ' על 2 מ' מרובע. כאן אין הגודל הנדרש. בנוסף זה מוביל לשירותים.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">27.11.2025</span>
+      <div class="qa-question">האם מברכים על קביעת מזוזה במשרד?</div>
+      <div class="qa-answer">מקום החייב במזוזה הוא חדר של 2 מ' על 2 מ' לפחות ומשמש לצרכי האדם. משרד הוא ודאי כזה. ולכן יש לקבוע בו מזוזה בברכה. ואף אם שמו מזוזה בכניסה הראשית וקובעים בחדר אחר - חייב לברך.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 12: צדקה ומעשרות -->
+<section class="category" id="cat12">
+  <div class="category-header">
+    <span class="cat-num">13</span>
+    <h2>צדקה ומעשרות</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">12.02.2026</span>
+      <div class="qa-question">תרומה למארזים לחולי סרטן - תרמו יותר ממה שצריך, מותר להעביר למטרה אחרת?</div>
+      <div class="qa-answer">כן. מותר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">09.02.2026</span>
+      <div class="qa-question">האם צריך לתת מעשרות אם העבודה לא קבועה (מלצרות)?</div>
+      <div class="qa-answer">כן.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">31.01.2026</span>
+      <div class="qa-question">האם אפשר לתרום כסף ולהתנות שכשירוויח התרומה תהיה המעשר?</div>
+      <div class="qa-answer">כן. יש מנהג כזה בחב"ד לקבוע את המעשר לפי כמה שאתה רוצה להרוויח. לתת אותו מראש.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">24.11.2025</span>
+      <div class="qa-question">האם ילדים שעובדים קצת צריכים לתת מעשר?</div>
+      <div class="qa-answer">זה מנהג טוב מאוד.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 13: לשון הרע ורכילות -->
+<section class="category" id="cat13">
+  <div class="category-header">
+    <span class="cat-num">14</span>
+    <h2>לשון הרע ורכילות</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">13.01.2026</span>
+      <div class="qa-question">בן משפחה רוצה לספר לי על עוול שנעשה לאח - האם מותר לשמוע?</div>
+      <div class="qa-answer">בהלכות לשון הרע אין הבדל בין בן משפחה לאדם אחר. אם זה תועלת - מותר. אם לא - אסור. כדאי מאוד להימנע מדיבורים אחד על השני בתוך המשפחה.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Category 14: הלכות שונות -->
+<section class="category" id="cat14">
+  <div class="category-header">
+    <span class="cat-num">15</span>
+    <h2>הלכות שונות</h2>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-item">
+      <span class="qa-date">13.02.2026</span>
+      <div class="qa-question">חולה שהתרפא משפעת קשה של 5 ימים - צריך לברך הגומל?</div>
+      <div class="qa-answer">אם היה בבית ולא היה צורך באשפוז לא נהגו לברך בזה. מנהגו של עולם הוא.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">10.02.2026</span>
+      <div class="qa-question">מותר לשדך זוג שאינם שומרים תומ"צ?</div>
+      <div class="qa-answer">דיברנו כמה פעמים שאנחנו אחראים על המצוות של אחינו ולא על העבירות. ומכיוון שזו מצווה להינשא ודאי ראוי לעשות שידוכים לכל יהודי.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">01.02.2026</span>
+      <div class="qa-question">קשר הי' על תפילין של יד - מספיק שתחתית הקשר תיגע במעברתא?</div>
+      <div class="qa-answer">תחתית הקשר מספיקה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">29.01.2026</span>
+      <div class="qa-question">יש עדיפות לסדר ט"ו בשבט - ערב או יום?</div>
+      <div class="qa-answer">אין עדיפות.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">29.01.2026</span>
+      <div class="qa-question">תפיסה שהאדם שותף לבורא עולם ויכול ליצור מציאות דרך מדיטציות - האם זה סותר את התפיסה היהודית?</div>
+      <div class="qa-answer">היות האדם שותף לבורא עולם זוהי תפיסה יהודית עתיקה. עיקר ההבדל הוא למי מתפללים. כשהתפילה היא לבורא עולם ניתן להשתמש בפרקטיקות האלו. אך כל תפילה אל "היקום, ההויה, הטבע" עלולה להיחשב סרך עבודה זרה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">22.01.2026</span>
+      <div class="qa-question">שיעורי יוגה באינטרנט עם פסלי בודהה - מותר?</div>
+      <div class="qa-answer">יוגה כפעילות רגיעה נשימה וגמישות היא מעולה. אך יש להיזהר מכל הקשר בודהיסטי שזה עבודה זרה גמורה. וזה כולל גם שיעורי זום.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">21.01.2026</span>
+      <div class="qa-question">נער בר מצווה - מתי לברך שהחיינו על טלית ותפילין?</div>
+      <div class="qa-answer">הטוב ביותר הוא לברך מייד לאחר עטיפת הטלית ולכוון על התפילין.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">20.01.2026</span>
+      <div class="qa-question">הליכה בלי כיפה במקום צורך?</div>
+      <div class="qa-answer">אין עבירה ללכת בלי כיפה במקום צורך אך יש לדאוג לא להיכנס לכזה מצב כגון לבוא עם כובע.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">18.01.2026</span>
+      <div class="qa-question">שתיל של עץ מהמשתלה לעציץ במרפסת - צריך לספור שנות עורלה מחדש?</div>
+      <div class="qa-answer">אם השתיל היה בעציץ נקוב הזמן שהיה בקרקע המשתלה נחשב.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">17.01.2026</span>
+      <div class="qa-question">האם מותר להחזיר לשכן שתי קופסאות שימורים תמורת אחת גדולה שלוויתי (חשש ריבית)?</div>
+      <div class="qa-answer">אם אתה וגם השכן לא מכוונים לריבית וזה נועד לחסוך טרחה - מותר לכתחילה. מדובר באיסור דרבנן ובכהאי גוונא צריך ששני הצדדים יכוונו לשם ריבית.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">07.01.2026</span>
+      <div class="qa-question">מנהגי יארצייט על סבא?</div>
+      <div class="qa-answer">אצל סבא לא נוהגים הלכות המונהגות אצל הורים. אלא מסתפקים באמירת קדיש ביום הפטירה. הדלקת נר. לימוד משניות. ותפילת אשכבה. אין צורך לעלות לתורה. מעלה נפלאה לתרום סעודה שלישית בקהילה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">06.01.2026</span>
+      <div class="qa-question">האם מותר לבנות להשתמש בבובת יד של תיאטרון בפני בן?</div>
+      <div class="qa-answer">מותר. שהרי המבטים מופנים לבובה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">05.01.2026</span>
+      <div class="qa-question">הופעה ללא מחיצה - מותר לאישה?</div>
+      <div class="qa-answer">(הרב שאל הופעה של מי - תלוי בהקשר)</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">29.12.2025</span>
+      <div class="qa-question">מי שלא צם - האם מתפלל עם כל התוספות של הצום?</div>
+      <div class="qa-answer">סליחות אומר כרגיל. אך לא עננו בשמונה עשרה שהרי אינו צם.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">30.12.2025</span>
+      <div class="qa-question">כואב לי מאוד אחרי גשר בשיניים ביום צום - מה לעשות?</div>
+      <div class="qa-answer">תקחי לגימה קטנה בשביל לבלוע את המשכך ותמשיכי לצום.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">29.12.2025</span>
+      <div class="qa-question">האם יש עניין למי שפטור מצום לא לאכול בפרהסיה?</div>
+      <div class="qa-answer">כן. יש עניין. גם משום חשד וגם כי זה יום לאכול רק מה שצריך בצנעא.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">29.12.2025</span>
+      <div class="qa-question">תלמיד ששבר משהו בישיבה ולא מוכן להתוודות - מותר לחבר להלשין?</div>
+      <div class="qa-answer">אסור להלשין. תרוויחו קיוסק ותפסידו חברות. תמצאו את הדרך לעזור למי ששבר להודות. הלשנה בתוך מחזור היא הרסנית.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">26.12.2025</span>
+      <div class="qa-question">למה פונים לה' בגוף שני ("ברוך אתה")?</div>
+      <div class="qa-answer">קרוב ה' לכל קוראיו. בתפילה אנו פונים אליו כאבא.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">24.12.2025</span>
+      <div class="qa-question">איסור נעילת נעליים של נפטר - הלכה או מנהג?</div>
+      <div class="qa-answer">ככלל בהלכות אבלות הרוב זה מנהגים. האיסור הוא על לבישת מוצרים מעור דווקא. ראשי תיבות חכ"ם: חגורה, כובע ומנעל מעור.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">24.12.2025</span>
+      <div class="qa-question">תשלום באוטובוס כשמכשיר התיקוף לא עובד - צריך לשלם באפליקציה?</div>
+      <div class="qa-answer">ברור שאם אתה רגיל לשלם באפליקציה עליך לשלם מייד. גם אם רגיל ברב קו ראוי לתקף בפעם אחרת פעמיים.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">23.12.2025</span>
+      <div class="qa-question">יש בעיה להתחתן בר"ח סיון?</div>
+      <div class="qa-answer">יש מהאשכנזים הנוהגים לא להתחתן כל ספירת העומר. אך רוב ישראל מתחתנים החל מל"ג בעומר. ולכן אין שום מניעה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">21.12.2025</span>
+      <div class="qa-question">האם מותר לי בברכת הילדים בליל שבת לשנות הטיה ללשון נקבה לבנות?</div>
+      <div class="qa-answer">אין בזה איסור. כל אזכרת שם שמיים הנעשית מתוך כוונה ורצינות היא מותרת.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">20.12.2025</span>
+      <div class="qa-question">תכשיט שכתוב עליו "טוב להודות לה'" - מותר להיכנס לשירותים?</div>
+      <div class="qa-answer">כאשר יש שם ה' על תכשיט אין להיכנס עם זה לשירותים. תכשיט אפשר פשוט להסתיר עם הבגד.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">19.12.2025</span>
+      <div class="qa-question">יש מעלה לא לקחת כסף על לימוד תורה?</div>
+      <div class="qa-answer">מותר לקחת כסף. אבל אם לא לוקחים זו ודאי מעלה.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">17.12.2025</span>
+      <div class="qa-question">חטיפים שנשארו ממחנה קו לחיים - מותר לקחת?</div>
+      <div class="qa-answer">ודאי להעביר לעמותה למחנה הבא או לאירוע הבא. חטיפים זה דבר שנשמר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">15.12.2025</span>
+      <div class="qa-question">האם מותר ללבוש בגד כולו אדום?</div>
+      <div class="qa-answer">גם היום בגד אדום הוא מושך עין ולכן כשכולו אדום נהגו להימנע מלבישתו. אם מדובר בעניני בטיחות בדרכים ודאי מותר.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">14.12.2025</span>
+      <div class="qa-question">מותר למכור דירה לגויים דרוזים (לא תחנם)?</div>
+      <div class="qa-answer">נושא ארוך. להלכה נפסק איסור על כל סוגי הגויים. אמנם בהפסד ניכר ויש לגוי כבר חניה - התירו. דרוזים ודאי עדיף בגלל שותפותם בצבא. הכי טוב לנסות למכור תחילה ליהודים.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">13.12.2025</span>
+      <div class="qa-question">בנות מעל גיל בת מצווה יכולות להשלים לזימון?</div>
+      <div class="qa-answer">חיוב נשים בברכת המזון זהה לגברים. הן יכולות לזמן בפני עצמן. לגבי צירוף לגברים - בתוך המשפחה אין בעיה. ודאי אפשרי וגם ראוי.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">08.12.2025</span>
+      <div class="qa-question">חז"ל טוענים כנגד דינה - איך מתיישב עם בחירה חופשית?</div>
+      <div class="qa-answer">חז"ל התעסקו יותר בשאלה כיצד הצער הזה קרה ליעקב חיר האבות. המדרש אומר שהייתה "יצאנית" - יצאה לראות בבנות הארץ בלי ליווי.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">07.12.2025</span>
+      <div class="qa-question">שאלה על שינוי שם יעקב לישראל - למה עדיין נקרא יעקב?</div>
+      <div class="qa-answer">אצל יעקב הפסוק אומר "שמך יעקב" - כלומר למרות שיש לך שם ישראל עדיין ימשיכו לקרוא לך יעקב. למרות המדריגה הלאומית עדיין ממשיכה להתקיים המדריגה המשפחתית.</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">30.11.2025</span>
+      <div class="qa-question">האם מותר לקנות מנויים מחו"ל במחיר זול בעזרת VPN?</div>
+      <div class="qa-answer">גזל הגוי אסור. (הרחבה: זה לא הפליה אלא פרמטרים כמו מס, הסכם מדינה, רגולציה, ביקוש)</div>
+    </div>
+
+    <div class="qa-item">
+      <span class="qa-date">20.11.2025</span>
+      <div class="qa-question">הנחיות לקידוש בבית כנסת?</div>
+      <div class="qa-answer">אין קידוש אלא במקום סעודה. אך לצורך כך די לנו במזונות. אין ראוי ליטול ידיים ולהתחייב בסעודת קבע. החכם עיניו בראשו להתענג אך לא למלא בטנו.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="footer">
+  <p>שו״ת יחדיו &mdash; ערוץ וואטסאפ של הרב אייל ורד</p>
+  <p>נובמבר 2025 &ndash; מרץ 2026 &nbsp;|&nbsp; עודכן לאחרונה: 21.03.2026</p>
+</div>
+
+</div><!-- end container -->
+
+</body>
+</html>
