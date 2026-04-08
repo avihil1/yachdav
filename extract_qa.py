@@ -191,8 +191,12 @@ def extract_qa_pairs(messages, roles):
         if not question_parts:
             continue
 
-        # Skip reactions/riddles between question and answer
-        while i < n and roles[i] in ("תגובה", "חידה"):
+        # Skip reactions/riddles and non-question messages from other senders.
+        # Real questions from other senders (containing '?') are NOT skipped —
+        # they block pairing so they can be processed as their own Q&A.
+        while i < n and (roles[i] in ("תגובה", "חידה") or
+                         (roles[i] == "שואל" and messages[i][1] != question_sender
+                          and '?' not in messages[i][2])):
             i += 1
 
         # Look for rabbi's answer
