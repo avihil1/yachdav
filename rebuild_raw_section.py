@@ -102,6 +102,18 @@ RABBI_CONTINUATION_RE = re.compile(
     r'מחילה\.)'
 )
 
+# WhatsApp reply metadata prefix: [Reply to <sender> (msg <msg_id>)]
+REPLY_META_RE = re.compile(r'^\[Reply to (\S+) \(msg ([^)]+)\)\]\s*')
+
+
+def strip_reply_metadata(text):
+    """Strip WhatsApp reply metadata prefix from message text.
+    Returns (clean_text, reply_to_sender, reply_to_msg_id)."""
+    m = REPLY_META_RE.match(text)
+    if m:
+        return text[m.end():], m.group(1), m.group(2)
+    return text, None, None
+
 
 def classify_role(text, raw_sender, idx, messages):
     """
@@ -216,7 +228,8 @@ def classify_all_messages(messages):
     _prev_roles = {}
     roles = []
     for idx, (ts, sender, text) in enumerate(messages):
-        role = classify_role(text, sender, idx, messages)
+        clean_text, _, _ = strip_reply_metadata(text)
+        role = classify_role(clean_text, sender, idx, messages)
         _prev_roles[idx] = role
         roles.append(role)
     return roles
@@ -304,7 +317,8 @@ def build_raw_section(messages):
         sender_color = get_sender_color(name)
         date_str = ts[:10]
         time_str = ts[11:16]
-        escaped_text = escape_html(text)
+        clean_text, _, _ = strip_reply_metadata(text)
+        escaped_text = escape_html(clean_text)
 
         # Role badge
         role_label = {
@@ -319,7 +333,7 @@ def build_raw_section(messages):
         if role not in ("הרב", "חידה"):
             sender_display = f' <span class="raw-msg-name" style="color:{sender_color}">{escape_html(name)}</span>'
 
-        msg_cards.append(f'''<div class="raw-msg" id="raw-msg-{idx}" data-role="{role}" data-sender="{escape_html(name)}" data-text="{escape_html(text.lower())}" style="border-right-color:{sender_color}" onclick="showInContext({idx})">
+        msg_cards.append(f'''<div class="raw-msg" id="raw-msg-{idx}" data-role="{role}" data-sender="{escape_html(name)}" data-text="{escape_html(clean_text.lower())}" style="border-right-color:{sender_color}" onclick="showInContext({idx})">
 <div class="raw-msg-header">
 <span class="raw-msg-role" style="background:{role_color}">{role_label}</span>{sender_display}
 <span class="raw-msg-time">{date_str} {time_str}</span>

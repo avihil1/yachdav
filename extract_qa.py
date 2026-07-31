@@ -6,7 +6,8 @@ Categorize each pair and generate complete HTML category sections.
 import re
 import json
 from rebuild_raw_section import (
-    parse_messages, classify_all_messages, RABBI_SENDERS, get_sender_name
+    parse_messages, classify_all_messages, RABBI_SENDERS, get_sender_name,
+    strip_reply_metadata,
 )
 
 RAW_PATH = "/Users/hillelk/Documents/shut-yachdav/raw_messages.txt"
@@ -155,35 +156,108 @@ def categorize_qa(question_text, answer_text):
     return best_cat
 
 
-def extract_qa_pairs(messages, roles):
+def _clean_text(text):
+    """Strip reply metadata and whitespace from message text for display."""
+    clean, _, _ = strip_reply_metadata(text.strip())
+    return clean
+
+
+def extract_qa_pairs(messages, roles, reply_infos=None):
     """
     Extract Q&A pairs from classified messages.
-    A Q&A pair is: one or more question messages (שואל) followed by
-    one or more rabbi answer messages (הרב).
+    Phase 1: Reply-linked pairing — when a rabbi message has WhatsApp reply
+             metadata pointing to a specific sender, pair deterministically.
+    Phase 2: Proximity pairing — sequential שואל→הרב for remaining messages.
     """
     qa_pairs = []
-    i = 0
     n = len(messages)
+    paired = set()
 
+    # Phase 1: Reply-linked pairing
+    if reply_infos:
+        for rabbi_idx in range(n):
+            if roles[rabbi_idx] != "הרב" or not reply_infos[rabbi_idx]:
+                continue
+            reply_sender, _ = reply_infos[rabbi_idx]
+
+            # Find the closest prior שואל message from reply_sender.
+            # If reply_sender is a rabbi, no שואל match → skips automatically.
+            q_idx = None
+            for j in range(rabbi_idx - 1, -1, -1):
+                if j in paired:
+                    continue
+                if roles[j] == "שואל" and messages[j][1] == reply_sender:
+                    q_idx = j
+                    break
+
+            if q_idx is None:
+                continue
+
+            # Expand question backward (consecutive שואל from same sender)
+            q_start = q_idx
+            while (q_start > 0 and q_start - 1 not in paired
+                   and roles[q_start - 1] == "שואל"
+                   and messages[q_start - 1][1] == reply_sender):
+                q_start -= 1
+
+            question_parts = []
+            for j in range(q_start, q_idx + 1):
+                text = _clean_text(messages[j][2])
+                if text and text != "[media]":
+                    question_parts.append(text)
+                paired.add(j)
+
+            if not question_parts:
+                continue
+
+            answer_parts = []
+            j = rabbi_idx
+            while j < n and roles[j] == "הרב":
+                text = _clean_text(messages[j][2])
+                if text and text != "[media]":
+                    answer_parts.append(text)
+                paired.add(j)
+                j += 1
+
+            if not answer_parts:
+                continue
+
+            question_text = "\n".join(question_parts)
+            if len(question_text.replace("[media]", "").strip()) < 5:
+                continue
+
+            qa_pairs.append({
+                "date": messages[q_start][0][:10],
+                "question": question_text,
+                "answer": "\n".join(answer_parts),
+                "questioner": get_sender_name(messages[q_start][1]),
+                "msg_idx": q_start,
+                "followups": [],
+            })
+
+    # Phase 2: Proximity pairing for remaining messages
+    i = 0
     while i < n:
-        # Look for a question
+        if i in paired:
+            i += 1
+            continue
+
         if roles[i] != "שואל":
             i += 1
             continue
 
-        # Collect consecutive question messages
         question_parts = []
         question_sender = messages[i][1]
         question_ts = messages[i][0]
-        question_msg_idx = i  # index into raw messages for linking
+        question_msg_idx = i
 
-        while i < n and roles[i] == "שואל":
+        while i < n and i not in paired and roles[i] == "שואל":
             ts, sender, text = messages[i]
-            # Stop if a different sender starts asking — that's a new question
             if sender != question_sender and sender != "שו״ת יחדיו" and question_sender != "שו״ת יחדיו":
                 break
-            if text.strip() and text.strip() != "[media]":
-                question_parts.append(text.strip())
+            clean = _clean_text(text)
+            if clean and clean != "[media]":
+                question_parts.append(clean)
             if not question_sender or question_sender == "שו״ת יחדיו":
                 question_sender = sender
             i += 1
@@ -191,24 +265,21 @@ def extract_qa_pairs(messages, roles):
         if not question_parts:
             continue
 
-        # Skip reactions/riddles and non-question messages from other senders.
-        # Real questions from other senders (containing '?') are NOT skipped —
-        # they block pairing so they can be processed as their own Q&A.
-        while i < n and (roles[i] in ("תגובה", "חידה") or
+        # Skip reactions/riddles and already-paired messages
+        while i < n and (i in paired or roles[i] in ("תגובה", "חידה") or
                          (roles[i] == "שואל" and messages[i][1] != question_sender
                           and '?' not in messages[i][2])):
             i += 1
 
-        # Look for rabbi's answer
-        if i >= n or roles[i] != "הרב":
+        if i >= n or roles[i] != "הרב" or i in paired:
             continue
 
-        # Collect consecutive rabbi answer messages
         answer_parts = []
-        while i < n and roles[i] == "הרב":
+        while i < n and roles[i] == "הרב" and i not in paired:
             ts, sender, text = messages[i]
-            if text.strip() and text.strip() != "[media]":
-                answer_parts.append(text.strip())
+            clean = _clean_text(text)
+            if clean and clean != "[media]":
+                answer_parts.append(clean)
             i += 1
 
         if not answer_parts:
@@ -217,66 +288,55 @@ def extract_qa_pairs(messages, roles):
         question_text = "\n".join(question_parts)
         answer_text = "\n".join(answer_parts)
 
-        # Skip very short questions (greetings only) or media-only
         if len(question_text.replace("[media]", "").strip()) < 5:
             continue
 
-        # Skip if answer is too short (just "כן" etc. without context)
-        # Actually keep these — they are valid answers
-
-        # Build the QA pair
         qa = {
-            "date": question_ts[:10],  # YYYY-MM-DD
+            "date": question_ts[:10],
             "question": question_text,
             "answer": answer_text,
             "questioner": get_sender_name(question_sender),
-            "msg_idx": question_msg_idx,  # raw message index for linking
+            "msg_idx": question_msg_idx,
             "followups": [],
         }
 
-        # Look for follow-up Q&A in the same conversation
-        # (question followed by answer within a few messages)
+        # Follow-up Q&A in the same conversation
         followup_count = 0
         while i < n and followup_count < 3:
-            # Skip reactions
             j = i
-            while j < n and roles[j] == "תגובה":
+            while j < n and (roles[j] == "תגובה" or j in paired):
                 j += 1
 
-            if j >= n or roles[j] != "שואל":
+            if j >= n or roles[j] != "שואל" or j in paired:
                 break
 
-            # Check if this follow-up is close in time (within 30 min)
             follow_ts = messages[j][0]
             if not _is_close_in_time(qa["date"], follow_ts[:10], question_ts, follow_ts):
                 break
 
-            # Collect follow-up question
             fu_q_parts = []
-            while j < n and roles[j] == "שואל":
-                ts, sender, text = messages[j]
-                if text.strip() and text.strip() != "[media]":
-                    fu_q_parts.append(text.strip())
+            while j < n and roles[j] == "שואל" and j not in paired:
+                clean = _clean_text(messages[j][2])
+                if clean and clean != "[media]":
+                    fu_q_parts.append(clean)
                 j += 1
 
             if not fu_q_parts:
                 i = j
                 break
 
-            # Skip reactions
-            while j < n and roles[j] in ("תגובה", "חידה"):
+            while j < n and (roles[j] in ("תגובה", "חידה") or j in paired):
                 j += 1
 
-            # Collect follow-up answer
-            if j >= n or roles[j] != "הרב":
+            if j >= n or roles[j] != "הרב" or j in paired:
                 i = j
                 break
 
             fu_a_parts = []
-            while j < n and roles[j] == "הרב":
-                ts, sender, text = messages[j]
-                if text.strip() and text.strip() != "[media]":
-                    fu_a_parts.append(text.strip())
+            while j < n and roles[j] == "הרב" and j not in paired:
+                clean = _clean_text(messages[j][2])
+                if clean and clean != "[media]":
+                    fu_a_parts.append(clean)
                 j += 1
 
             if fu_a_parts:
@@ -441,6 +501,14 @@ def main():
     messages = parse_messages(raw_text)
     print(f"Parsed {len(messages)} messages")
 
+    # Extract reply metadata before classification (classify strips it internally)
+    reply_infos = []
+    for _, _, text in messages:
+        _, reply_sender, reply_msg_id = strip_reply_metadata(text)
+        reply_infos.append((reply_sender, reply_msg_id) if reply_sender else None)
+    reply_count = sum(1 for r in reply_infos if r)
+    print(f"Messages with reply metadata: {reply_count}")
+
     # Classify roles
     roles = classify_all_messages(messages)
     role_counts = {}
@@ -448,8 +516,8 @@ def main():
         role_counts[r] = role_counts.get(r, 0) + 1
     print(f"Roles: {dict(sorted(role_counts.items()))}")
 
-    # Extract Q&A pairs
-    qa_pairs = extract_qa_pairs(messages, roles)
+    # Extract Q&A pairs (reply-linked + proximity)
+    qa_pairs = extract_qa_pairs(messages, roles, reply_infos)
     print(f"\nExtracted {len(qa_pairs)} Q&A pairs")
 
     # Categorize
