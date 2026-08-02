@@ -308,6 +308,11 @@ def build_raw_section(messages):
             )
     legend_html = ' '.join(legend_items)
 
+    # Build sender index for reply linking: map sender_id → list of (idx, ts)
+    sender_msgs = {}
+    for idx, (ts, raw_sender, text) in enumerate(messages):
+        sender_msgs.setdefault(raw_sender, []).append(idx)
+
     # Build message cards
     msg_cards = []
     for idx, (ts, raw_sender, text) in enumerate(messages):
@@ -317,7 +322,7 @@ def build_raw_section(messages):
         sender_color = get_sender_color(name)
         date_str = ts[:10]
         time_str = ts[11:16]
-        clean_text, _, _ = strip_reply_metadata(text)
+        clean_text, reply_sender, reply_msg_id = strip_reply_metadata(text)
         escaped_text = escape_html(clean_text)
 
         # Role badge
@@ -333,12 +338,37 @@ def build_raw_section(messages):
         if role not in ("הרב", "חידה"):
             sender_display = f' <span class="raw-msg-name" style="color:{sender_color}">{escape_html(name)}</span>'
 
+        # Reply indicator: find closest prior message from reply_sender
+        reply_html = ""
+        if reply_sender:
+            reply_target = None
+            reply_name = get_sender_name(reply_sender)
+            for candidate_sender, candidate_indices in sender_msgs.items():
+                if candidate_sender == reply_sender or get_sender_name(candidate_sender) == reply_name:
+                    for ci in reversed(candidate_indices):
+                        if ci < idx:
+                            reply_target = ci
+                            break
+                    if reply_target is not None:
+                        break
+            if reply_target is not None:
+                target_role = roles[reply_target]
+                target_label = "הרב" if target_role == "הרב" else "שואל" if target_role == "שואל" else target_role
+                reply_preview = strip_reply_metadata(messages[reply_target][2])[0].strip().replace('\n', ' ')
+                reply_preview = reply_preview[:40] + ("..." if len(reply_preview) > 40 else "")
+                reply_html = (
+                    f'<div class="raw-msg-reply" onclick="event.stopPropagation(); showInContext({reply_target}, true)">'
+                    f'<span class="reply-arrow">↩</span> '
+                    f'{escape_html(target_label)}: {escape_html(reply_preview)}'
+                    f'</div>'
+                )
+
         msg_cards.append(f'''<div class="raw-msg" id="raw-msg-{idx}" data-role="{role}" data-sender="{escape_html(name)}" data-text="{escape_html(clean_text.lower())}" style="border-right-color:{sender_color}" onclick="showInContext({idx})">
 <div class="raw-msg-header">
 <span class="raw-msg-role" style="background:{role_color}">{role_label}</span>{sender_display}
 <span class="raw-msg-time">{date_str} {time_str}</span>
 </div>
-<div class="raw-msg-text">{escaped_text}</div>
+{reply_html}<div class="raw-msg-text">{escaped_text}</div>
 </div>''')
 
     messages_html = '\n'.join(msg_cards)
@@ -484,6 +514,22 @@ def build_raw_section(messages):
     line-height: 1.5;
     word-break: break-word;
   }}
+  .raw-msg-reply {{
+    font-size: 0.78rem;
+    color: var(--text-light, #888);
+    cursor: pointer;
+    margin-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }}
+  .raw-msg-reply:hover {{
+    color: var(--primary, #2d5f8a);
+    text-decoration: underline;
+  }}
+  .raw-msg-reply .reply-arrow {{
+    font-size: 0.85rem;
+  }}
   .raw-msg.hidden {{
     display: none;
   }}
@@ -520,7 +566,7 @@ def build_raw_section(messages):
     {len(messages)} הודעות &mdash; אוגוסט 2024 עד אפריל 2026
   </div>
 
-  <input type="text" class="raw-search-box" id="rawSearch" placeholder="חיפוש בהודעות..." oninput="filterRawMessages()">
+  <input type="text" class="raw-search-box" id="rawSearch" placeholder="חיפוש בהודעות..." oninput="debouncedFilter()">
 
   <div class="raw-filter-buttons">
     <button class="raw-filter-btn active" data-filter="all" onclick="setRoleFilter('all', this)" style="border-color: var(--primary);">הכל</button>
@@ -542,17 +588,39 @@ def build_raw_section(messages):
 
 <script>
 var currentRoleFilter = 'all';
+var _filterTimer = null;
+var _msgCache = null;
+
+function _getMsgCache() {{
+  if (_msgCache) return _msgCache;
+  var msgs = document.querySelectorAll('.raw-msg');
+  _msgCache = [];
+  msgs.forEach(function(m) {{
+    _msgCache.push({{
+      el: m,
+      role: m.getAttribute('data-role') || '',
+      sender: (m.getAttribute('data-sender') || '').toLowerCase(),
+      text: m.getAttribute('data-text') || '',
+      textEl: m.querySelector('.raw-msg-text'),
+      origHtml: null
+    }});
+  }});
+  return _msgCache;
+}}
+
+function debouncedFilter() {{
+  clearTimeout(_filterTimer);
+  _filterTimer = setTimeout(filterRawMessages, 150);
+}}
+
 function showInContext(msgIdx, fromQA) {{
-  // When called from raw section search results, only act if filter is active
   if (!fromQA) {{
     var q = document.getElementById('rawSearch').value.trim();
     if (!q && currentRoleFilter === 'all') return;
   }}
-
-  // Clear search and reset filter to show all messages
   document.getElementById('rawSearch').value = '';
   currentRoleFilter = 'all';
-  document.querySelectorAll('.raw-filter-btn').forEach(b => {{
+  document.querySelectorAll('.raw-filter-btn').forEach(function(b) {{
     b.classList.remove('active');
     b.style.background = '';
     b.style.color = '';
@@ -561,19 +629,18 @@ function showInContext(msgIdx, fromQA) {{
   var allBtn = document.querySelector('.raw-filter-btn[data-filter=\"all\"]');
   if (allBtn) {{ allBtn.classList.add('active'); allBtn.style.borderColor = 'var(--primary)'; }}
   filterRawMessages();
-
-  // Scroll to the clicked message and highlight it
   var el = document.getElementById('raw-msg-' + msgIdx);
   if (el) {{
     el.classList.remove('highlight');
-    void el.offsetWidth; // force reflow for re-triggering animation
+    void el.offsetWidth;
     el.classList.add('highlight');
     el.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
   }}
 }}
+
 function setRoleFilter(role, btn) {{
   currentRoleFilter = role;
-  document.querySelectorAll('.raw-filter-btn').forEach(b => {{
+  document.querySelectorAll('.raw-filter-btn').forEach(function(b) {{
     b.classList.remove('active');
     b.style.background = '';
     b.style.color = '';
@@ -590,35 +657,45 @@ function setRoleFilter(role, btn) {{
   }}
   filterRawMessages();
 }}
+
 function filterRawMessages() {{
-  const q = document.getElementById('rawSearch').value.trim().toLowerCase();
-  const msgs = document.querySelectorAll('.raw-msg');
-  const isFiltered = q || currentRoleFilter !== 'all';
-  let shown = 0;
-  msgs.forEach(m => {{
-    const role = m.getAttribute('data-role') || '';
-    const sender = (m.getAttribute('data-sender') || '').toLowerCase();
-    const text = (m.getAttribute('data-text') || '');
-    const roleMatch = currentRoleFilter === 'all' || role === currentRoleFilter;
-    const textMatch = !q || sender.includes(q) || text.includes(q);
-    const match = roleMatch && textMatch;
-    m.classList.toggle('hidden', !match);
-    m.classList.toggle('clickable', isFiltered && match);
-    if (match) shown++;
-    const textEl = m.querySelector('.raw-msg-text');
-    if (q && match) {{
-      const original = textEl.getAttribute('data-original') || textEl.innerHTML.replace(/<mark>/g, '').replace(/<\\/mark>/g, '');
-      if (!textEl.getAttribute('data-original')) textEl.setAttribute('data-original', textEl.innerHTML);
-      const regex = new RegExp('(' + q.replace(/[.*+?^${{}}()|[\\]\\\\]/g, '\\\\$&') + ')', 'gi');
-      textEl.innerHTML = original.replace(regex, '<mark>$1</mark>');
-    }} else if (textEl.getAttribute('data-original')) {{
-      textEl.innerHTML = textEl.getAttribute('data-original');
-      textEl.removeAttribute('data-original');
+  var q = document.getElementById('rawSearch').value.trim().toLowerCase();
+  var cache = _getMsgCache();
+  var isFiltered = q || currentRoleFilter !== 'all';
+  var shown = 0;
+  var escapedQ = q ? q.replace(/[.*+?^${{}}()|[\\]\\\\]/g, '\\\\$&') : '';
+  var regex = q ? new RegExp('(' + escapedQ + ')', 'gi') : null;
+
+  for (var i = 0; i < cache.length; i++) {{
+    var c = cache[i];
+    var roleMatch = currentRoleFilter === 'all' || c.role === currentRoleFilter;
+    var textMatch = !q || c.sender.indexOf(q) !== -1 || c.text.indexOf(q) !== -1;
+    var match = roleMatch && textMatch;
+
+    if (match) {{
+      c.el.style.display = '';
+      c.el.classList.toggle('clickable', isFiltered);
+      shown++;
+      if (q) {{
+        if (!c.origHtml) c.origHtml = c.textEl.innerHTML;
+        c.textEl.innerHTML = c.origHtml.replace(regex, '<mark>$1</mark>');
+      }} else if (c.origHtml) {{
+        c.textEl.innerHTML = c.origHtml;
+        c.origHtml = null;
+      }}
+    }} else {{
+      c.el.style.display = 'none';
+      c.el.classList.remove('clickable');
+      if (c.origHtml) {{
+        c.textEl.innerHTML = c.origHtml;
+        c.origHtml = null;
+      }}
     }}
-  }});
-  const stats = document.getElementById('rawSearchStats');
+  }}
+
+  var stats = document.getElementById('rawSearchStats');
   if (isFiltered) {{
-    stats.textContent = 'מציג ' + shown + ' מתוך ' + msgs.length + ' הודעות — לחץ על הודעה לצפייה בהקשר';
+    stats.textContent = 'מציג ' + shown + ' מתוך ' + cache.length + ' הודעות — לחץ על הודעה לצפייה בהקשר';
   }} else {{
     stats.textContent = '';
   }}
