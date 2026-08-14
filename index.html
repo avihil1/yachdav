@@ -577,6 +577,18 @@
     .qa-toolbar { flex-direction: column; }
     .qa-search-box { min-width: 100%; }
   }
+
+  .qa-no-answer {
+    background: transparent;
+    border-right-color: #c9c2b4;
+    color: #8a8375;
+    font-style: italic;
+  }
+
+  .qa-no-answer::before {
+    content: 'תשובה:';
+    color: #8a8375;
+  }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init('4kEdduiwBZ3Wroawr');</script>
@@ -587,7 +599,7 @@
   <div class="ornament">&#10040; &#10040; &#10040;</div>
   <h1>שו״ת יחדיו</h1>
   <div class="subtitle">שאלות ותשובות מאת הרב אייל ורד</div>
-  <div class="date-range">תקופה: אוגוסט 2024 &ndash; אפריל 2026 &nbsp;|&nbsp; 875 שאלות ותשובות &nbsp;|&nbsp; עדכון אחרון: 13.08.2026</div>
+  <div class="date-range">תקופה: אוגוסט 2024 &ndash; אפריל 2026 &nbsp;|&nbsp; 878 שאלות ותשובות &nbsp;|&nbsp; עדכון אחרון: 13.08.2026</div>
 </div>
 
 <div class="container">
@@ -600,27 +612,27 @@
 <nav class="toc">
   <h2>תוכן עניינים</h2>
   <div class="toc-grid">
-    <a href="#cat1"><span class="toc-num">1</span> כשרות - בשר וחלב <span class="toc-count">(130)</span></a>
-    <a href="#cat2"><span class="toc-num">2</span> כשרות - כללי <span class="toc-count">(99)</span></a>
-    <a href="#cat3"><span class="toc-num">3</span> כשרות - בדיקת חרקים ותוצרת <span class="toc-count">(20)</span></a>
-    <a href="#cat4"><span class="toc-num">4</span> כשרות - טבילת כלים <span class="toc-count">(14)</span></a>
+    <a href="#cat1"><span class="toc-num">1</span> כשרות - בשר וחלב <span class="toc-count">(132)</span></a>
+    <a href="#cat2"><span class="toc-num">2</span> כשרות - כללי <span class="toc-count">(98)</span></a>
+    <a href="#cat3"><span class="toc-num">3</span> כשרות - בדיקת חרקים ותוצרת <span class="toc-count">(19)</span></a>
+    <a href="#cat4"><span class="toc-num">4</span> כשרות - טבילת כלים <span class="toc-count">(13)</span></a>
     <a href="#cat5"><span class="toc-num">5</span> כשרות - הפרשת חלה <span class="toc-count">(64)</span></a>
-    <a href="#cat6"><span class="toc-num">6</span> ברכות <span class="toc-count">(57)</span></a>
+    <a href="#cat6"><span class="toc-num">6</span> ברכות <span class="toc-count">(58)</span></a>
     <a href="#cat7"><span class="toc-num">7</span> שבת <span class="toc-count">(101)</span></a>
-    <a href="#cat8"><span class="toc-num">8</span> תפילה <span class="toc-count">(92)</span></a>
-    <a href="#cat9"><span class="toc-num">9</span> פסח <span class="toc-count">(36)</span></a>
+    <a href="#cat8"><span class="toc-num">8</span> תפילה <span class="toc-count">(91)</span></a>
+    <a href="#cat9"><span class="toc-num">9</span> פסח <span class="toc-count">(35)</span></a>
     <a href="#cat10"><span class="toc-num">10</span> חנוכה <span class="toc-count">(8)</span></a>
     <a href="#cat11"><span class="toc-num">11</span> פורים <span class="toc-count">(8)</span></a>
     <a href="#cat12"><span class="toc-num">12</span> מזוזה <span class="toc-count">(3)</span></a>
     <a href="#cat13"><span class="toc-num">13</span> צדקה ומעשרות <span class="toc-count">(31)</span></a>
     <a href="#cat14"><span class="toc-num">14</span> לשון הרע ורכילות <span class="toc-count">(2)</span></a>
-    <a href="#cat16"><span class="toc-num">15</span> צום ותענית <span class="toc-count">(24)</span></a>
-    <a href="#cat18"><span class="toc-num">16</span> אבלות וזכרון <span class="toc-count">(24)</span></a>
+    <a href="#cat16"><span class="toc-num">15</span> צום ותענית <span class="toc-count">(23)</span></a>
+    <a href="#cat18"><span class="toc-num">16</span> אבלות וזכרון <span class="toc-count">(23)</span></a>
     <a href="#cat19"><span class="toc-num">17</span> ראש השנה ויום כיפור <span class="toc-count">(10)</span></a>
     <a href="#cat20"><span class="toc-num">18</span> סוכות ושמחת תורה <span class="toc-count">(6)</span></a>
     <a href="#cat21"><span class="toc-num">19</span> כיבוד הורים ובין אדם לחברו <span class="toc-count">(6)</span></a>
     <a href="#cat22"><span class="toc-num">20</span> נישואין ומשפחה <span class="toc-count">(1)</span></a>
-    <a href="#cat15"><span class="toc-num">21</span> הלכות שונות <span class="toc-count">(139)</span></a>
+    <a href="#cat15"><span class="toc-num">21</span> הלכות שונות <span class="toc-count">(146)</span></a>
   </div>
 </nav>
 
@@ -931,7 +943,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-5407', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">שלום הרב,<br>הבאתי לחבר חילוני שיש לו מטבח לא כשר סיר מרק.<br>הוא החזיר לי אותו שטוף.<br>אני לא יודע איזה שימוש נעשה בסיר.<br>האם יש צורך להכשיר את הסיר?</div>
-      <div class="qa-answer" id="qa-5407-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5407-a', this)" title="העתק קישור לתשובה">🔗</button>לעבוד במה</div>
+      <div class="qa-answer qa-no-answer" id="qa-5407-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5407-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-5388" data-cat="cat1" data-msg-idx="5388" data-date="06.05.2026">
@@ -1409,6 +1421,15 @@
       <div class="qa-answer" id="qa-3259-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3259-a', this)" title="העתק קישור לתשובה">🔗</button>מה הבעיה בזה?</div>
     </div>
 
+    <div class="qa-item" id="qa-3256" data-cat="cat1" data-msg-idx="3256" data-date="26.09.2025">
+      <span class="qa-date">26.09.2025</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(3256, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-3256', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">אפו אתמול בערב בתנור דברים חלביים,כדי להשתמש בתנור לדברים בשריים לכמה זמן מספיק להפעיל תוכנית פירולטי?</div>
+      <div class="qa-answer" id="qa-3256-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3256-a', this)" title="העתק קישור לתשובה">🔗</button>רבע שעה מספיקה</div>
+    </div>
+
     <div class="qa-item" id="qa-3160" data-cat="cat1" data-msg-idx="3160" data-date="16.09.2025">
       <span class="qa-date">16.09.2025</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(3160, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
@@ -1554,6 +1575,15 @@
       <div class="qa-followup-answer" id="qa-2313-fa2"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-2313-fa2', this)" title="העתק קישור לתשובת המשך">🔗</button>כל דבר של קודש עומד בפני עצמו. וחשוב ונפלא. ולכן ודאי שאם הולך עם תכלת גם אם מחלל שבת זה יעזור לו לשמור שבת בהמשך<br>שאלה שתים לא הבנתי<br>כן. אפשר</div>
       <div class="qa-followup" id="qa-2313-fq3"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-2313-fq3', this)" title="העתק קישור לשאלת המשך">🔗</button>כשעושים לחם מחמצת אז יש תהליך שבו עושים עיסה ממנה מתפתח שמרים וחידקים, כשרוצים להתפיח לכם לוקחים מהעיסה הזו במקום שמרים.<br>כל כמה ימים צריך לגרוע מהעיסה חתיכה ולהוסיף במקום קמח חדש.</div>
       <div class="qa-followup-answer" id="qa-2313-fa3"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-2313-fa3', this)" title="העתק קישור לתשובת המשך">🔗</button>זה נראה ממש חלק ממלאכת הכנת הפת האסורה מן התורה</div>
+    </div>
+
+    <div class="qa-item" id="qa-2253" data-cat="cat1" data-msg-idx="2253" data-date="20.05.2025">
+      <span class="qa-date">20.05.2025</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(2253, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-2253', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">שלום הרב <br>אם חבר שלי אכל גלידה חלבית עם כף פרווה ואחרי כמה זמן נזכר שהוא בשרי<br>מותר למישהו אחר לאכול מהכף שלו? האם הכף טרף?</div>
+      <div class="qa-answer" id="qa-2253-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-2253-a', this)" title="העתק קישור לתשובה">🔗</button>מותר</div>
     </div>
 
     <div class="qa-item" id="qa-2241" data-cat="cat1" data-msg-idx="2241" data-date="18.05.2025">
@@ -2296,15 +2326,6 @@
       <div class="qa-answer" id="qa-5368-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5368-a', this)" title="העתק קישור לתשובה">🔗</button>תודה יהונתן</div>
     </div>
 
-    <div class="qa-item" id="qa-5346" data-cat="cat2" data-msg-idx="5346" data-date="26.04.2026">
-      <span class="qa-date">26.04.2026</span>
-      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5346, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
-      <button class="qa-link-btn" onclick="copyQALink('qa-5346', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
-      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
-      <div class="qa-question">זה ההתקן שיש במעלית שבבית הקהילה?</div>
-      <div class="qa-answer" id="qa-5346-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5346-a', this)" title="העתק קישור לתשובה">🔗</button>אמנם אתם אנשים כשרים אך לא לזה הייתה כוונתי ( רבי נחמן)<br>שברנו את השיא של זמן המענה.</div>
-    </div>
-
     <div class="qa-item" id="qa-5275" data-cat="cat2" data-msg-idx="5275" data-date="16.04.2026">
       <span class="qa-date">16.04.2026</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5275, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
@@ -2603,9 +2624,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-3254', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">שלום<br>אם הגעתי למסעדה שהתעודת כשרות שלה פגה בכ&quot;ט אלול והמנהלת משמרת אומרת שהמשגיח פשוט עוד לא תלה את התעודה כי היה חג אתמול, האם אפשר לסמוך עליה ולאכול ?</div>
-      <div class="qa-answer" id="qa-3254-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3254-a', this)" title="העתק קישור לתשובה">🔗</button>כן. זה מצוי העניין הזה</div>
-      <div class="qa-followup" id="qa-3254-fq1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3254-fq1', this)" title="העתק קישור לשאלת המשך">🔗</button>אפו אתמול בערב בתנור דברים חלביים,כדי להשתמש בתנור לדברים בשריים לכמה זמן מספיק להפעיל תוכנית פירולטי?</div>
-      <div class="qa-followup-answer" id="qa-3254-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3254-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>רבע שעה מספיקה</div>
+      <div class="qa-answer qa-no-answer" id="qa-3254-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3254-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-3012" data-cat="cat2" data-msg-idx="3012" data-date="24.08.2025">
@@ -3008,22 +3027,22 @@
       <div class="qa-followup-answer" id="qa-1015-fa3"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-1015-fa3', this)" title="העתק קישור לתשובת המשך">🔗</button>אם הדלתות סגורות ניתן לברך<br>אפשר ליטול שם. כל הבעיה זה ברכה. הזכרת שם שמיים. אך נטילה שהיא לצורך טהרה או נקיות ודאי ניתן לעשות במבואה מן הסוג הזה<br>לאשכנזים- במדיה והמיקרו בן יומו ובדרך כלל זה המצב- יהיה אסור לחמם בו מאכל פרווה על מנת לאוכלו יחד עם תבשיל חלבי. אך כיסוי אטום יועיל בהחלט</div>
     </div>
 
+    <div class="qa-item" id="qa-831" data-cat="cat2" data-msg-idx="831" data-date="17.12.2024">
+      <span class="qa-date">17.12.2024</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(831, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-831', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">לא נפגע בכלל רק  מבקש גם לחדד.<br>אני משתדל ליטול כאשר אני לוי יחיד או מעט לויים והרבה כהנים.האם יש עניין ש5 לויים יחזיקו בנטלה בזמן חזרת השץ?<br>או אפילו שניים? לעיתים זה גורם גם לפטפטת ( מדבר רק על עצמי) ויציאה מהתפילה.</div>
+      <div class="qa-answer qa-no-answer" id="qa-831-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-831-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
+    </div>
+
     <div class="qa-item" id="qa-825" data-cat="cat2" data-msg-idx="825" data-date="15.12.2024">
       <span class="qa-date">15.12.2024</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(825, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
       <button class="qa-link-btn" onclick="copyQALink('qa-825', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">צהריים טובים הרב, ראיתי שבעניין זימון רב קודם לכהן אבל לביטול ידיים בבוקר רב יטול גם לתלמיד שלו אם הוא כהן ,מה היחס בין רב ישראל לתלמיד כהן?</div>
-      <div class="qa-answer" id="qa-825-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-825-a', this)" title="העתק קישור לתשובה">🔗</button>אם רב, הוא לוי הוא צריך ליטול ידיים לכהן גם אם הוא  תלמידו<br>כמה ביקשו ממני אז, אני מצרף פה רשימת המלצת קריאה של ספרי חובה.. קחו את הזמן..<br>[5.10.2022, 21:52] עומרי כהןמכון: *רשימת ספרי החובה שהזכרנו עד, עתה*<br>לא אירא רע-שרנסקי<br>אל תשלח ידך-הרב לאו<br>כעפעפי שחר-הרב סבתו. <br>אמת מארץ תצמח. תיאום כוונות  . <br>לטעום מן השמיים-על התכלת<br>סודו של הרבי. <br>אבי הפוטנציאל האנושי. על פרופ פוירשטיין<br>חלומות שלא חלמתי-על הקמת שלווה<br>ישראל סיפור הצלחה<br>אלה האחים שלי - אורי אור<br>לנצח כל רגע מחדש - יחיאל הררי<br>רסיס ממגש הכסף - מנחם אנסבכר<br>פרקי יומן - מאיר הר ציון<br>ויהי מה - מאיר הר ציון<br>חיים בריאים כהלכה - הרב יחזקאל אסחייך<br>ההיסטוריה של העם הפלשתיני<br>למה מי זה מייקל-שקדי<br>המתריע-עמוס גלעד<br>עם כלביא - נפתלי לביא לאו<br>סיפור טוב מתחיל מהאמצע - יואל שפיץ<br>שלוש עשרה מידות - הרב שטיינזלץ<br>חסידים צוחקים מזה - הרב פרומן<br>האדם הוא כמו חייט - הרב פרומן<br>זירת חיי - רפאל הלפרין<br>[3.7.2023, 21:16] חנן מגל: *רשימת ספרי החובה שהזכרנו עד, עתה*<br>לא אירא רע-שרנסקי<br>אל תשלח ידך-הרב לאו<br>כעפעפי שחר-הרב סבתו. <br>אמת מארץ תצמח. תיאום כוונות  . <br>לטעום מן השמיים-על התכלת<br>סודו של הרבי. <br>אבי הפוטנציאל האנושי. על פרופ פוירשטיין<br>חלומות שלא חלמתי-על הקמת שלווה<br>ישראל סיפור הצלחה<br>אלה האחים שלי - אורי אור<br>לנצח כל רגע מחדש - יחיאל הררי<br>רסיס ממגש הכסף - מנחם אנסבכר<br>פרקי יומן - מאיר הר ציון<br>ויהי מה - מאיר הר ציון<br>חיים בריאים כהלכה - הרב יחזקאל אסחייך<br>ההיסטוריה של העם הפלשתיני<br>למה מי זה מייקל-שקדי<br>המתריע-עמוס גלעד<br>עם כלביא - נפתלי לביא לאו<br>סיפור טוב מתחיל מהאמצע - יואל שפיץ<br>שלוש עשרה מידות - הרב שטיינזלץ<br>חסידים צוחקים מזה - הרב פרומן<br>האדם הוא כמו חייט - הרב פרומן<br>זירת חיי - רפאל הלפרין<br>מקדש בלהבות<br>לברכה ולא לקללה. תורה של חברת השפע. <br><br>סולם גנבים. <br>מהפכת הקשב. <br>סיפור טוב מתחיל באמצע. <br>יום אחד באקטובר</div>
-    </div>
-
-    <div class="qa-item" id="qa-815" data-cat="cat2" data-msg-idx="815" data-date="12.12.2024">
-      <span class="qa-date">12.12.2024</span>
-      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(815, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
-      <button class="qa-link-btn" onclick="copyQALink('qa-815', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
-      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
-      <div class="qa-question">שלום הרב,<br>האם לבנות מעל גיל מצוות מותר לרקוד באולטרה סגול ללא מסכות שמסתירות את הפנים מול גברים?</div>
-      <div class="qa-answer" id="qa-815-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-815-a', this)" title="העתק קישור לתשובה">🔗</button>מעולם לא שמענו על מסכה.. מניין באה ההמצאה הזו. .. אם זה אסור מסכה לא תועיל ואם זה מותר אז אין צורך במסכה. <br>למעשה. מכיון שזה בחושך ואין מראה גוף כלל אין בזה בעיה של צניעות. החושך יכסה ארץ וכו. <br>אכן ראוי באופן כללי שבנות מעל גיל מצוות יופיעו רק לפני נשים ולא להסתמך על היתרים. כי גם אם בעיה הלכתית אין כאן   .. אך מסר חינוכי של הקפדה על צניעות גם אין כאן. וכדאי להתרגל לזה שבנות מופיעות רק לפני בנות.</div>
+      <div class="qa-answer qa-no-answer" id="qa-825-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-825-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-781" data-cat="cat2" data-msg-idx="781" data-date="03.12.2024">
@@ -3341,7 +3360,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-1045', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">וחרק?</div>
-      <div class="qa-answer" id="qa-1045-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-1045-a', this)" title="העתק קישור לתשובה">🔗</button>באיחור מה אבל לא מוותרים על חידת רשי בפרשה..<br>אחד מהרמטכלים מופיע בפרשה   כתיאור של תכשיט. <br>מיהו הרמטכל ומהו התכשיט</div>
+      <div class="qa-answer qa-no-answer" id="qa-1045-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-1045-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-809" data-cat="cat3" data-msg-idx="809" data-date="10.12.2024">
@@ -3366,15 +3385,6 @@
       <div class="qa-followup-answer" id="qa-263-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-263-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>אלו ענינים של קבלה ואין לחשוש להם. אדרבה. יש עניין להסתפר ולגזור ציםרניים לפני שבת</div>
     </div>
 
-    <div class="qa-item" id="qa-114" data-cat="cat3" data-msg-idx="114" data-date="24.08.2024">
-      <span class="qa-date">24.08.2024</span>
-      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(114, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
-      <button class="qa-link-btn" onclick="copyQALink('qa-114', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
-      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
-      <div class="qa-question">שבוע טוב! אשמח לדעת מה מותר ומה אסור לגבי אישה ששרה בנוכחות גברים. תודה</div>
-      <div class="qa-answer" id="qa-114-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-114-a', this)" title="העתק קישור לתשובה">🔗</button>שלום וברכה קרן. <br>חכמים הגדרו מספר דברים  שעלולים ליצור קרבה יתירה בין איש לאשה שאינם נשואים.  ולכן הורו לנו להמנע מכך. יש לזכור שתכלית כל האיסורים הללו [ יחוד, קול באשה וכו] היא שמירה מכל משמר  על התא המשפחתי שהוא כמו כור גרעיני  שיש לו אנרגיה רבה וחשובה, אך  על כור גרעיני לא לוקחים  סיכונים. ומכאן ההרחקות הרבות.<br>לגבי מה ששאלת- אסרו חכמים לגבר לשמוע אשה שרה בקולה.    הקול  בשירתו  יש בו צד אישי ומקרב.  בכלל האיסור - שמיעה בהופעה חיה. וכן שירה  משותפת של גברים ונשים אסורה [ דוגמת קולולם] אלא אם  הגברים שרים באופן כזה שקולם של הנשים לא נשמע.   שמיעה דרך מכשירים אלקטרוניים. יש מקילים בזה - גם בגלל הרגילות וגם בגלל שאין חיבור בין מראה לקול, ויש מחמירים.  <br>במסגרות משפחתיות - כמו סעודת שבת ועוד, - הדעת נותנת להקל בדבר, , לא רק אחים אלא גם גיסים. וגיסות- ניתן לשיר יחד שירי שבת בשולחן ,  או לנגן ביחד בני הבית. כי  עיקר גזירת חכמים הייתה על אנשים זרים. ולא על בני הבית.  יש בזה עוד אריכות נוספת. ואם משהו לא ברור אשמח  להרחיב</div>
-    </div>
-
   </div>
 </section>
 
@@ -3392,7 +3402,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-5561', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">[תמונה - כלי פלסטיק ירוק חדש (שייקר/מיכל ערבוב עם ידית) - האם חייב בטבילה?]</div>
-      <div class="qa-answer" id="qa-5561-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5561-a', this)" title="העתק קישור לתשובה">🔗</button>לא. אם יהיה ארוע רק אזל לחוץ</div>
+      <div class="qa-answer qa-no-answer" id="qa-5561-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5561-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-5125" data-cat="cat4" data-msg-idx="5125" data-date="03.04.2026">
@@ -3543,15 +3553,6 @@
       <div class="qa-followup-answer" id="qa-468-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-468-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>שהכל</div>
     </div>
 
-    <div class="qa-item" id="qa-194" data-cat="cat4" data-msg-idx="194" data-date="13.09.2024">
-      <span class="qa-date">13.09.2024</span>
-      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(194, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
-      <button class="qa-link-btn" onclick="copyQALink('qa-194', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
-      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
-      <div class="qa-question">יש לנו קומקום שלא כתוב עליו שיוצר בארץ וחשבנו לתת אותו לעובדת של סבתא שלי ולהשאיל ממנה, השאלה שלנו היא אם זה באמת עובד כי בסוף לא ברור עד כמה היא באמת תבין מה רוצים ממנה..</div>
-      <div class="qa-answer" id="qa-194-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-194-a', this)" title="העתק קישור לתשובה">🔗</button>שבוע טוב עדיאל. <br>מטרת טבילת כלים היא הבדלה בין ישראל לעמים.  והנה על מנת להמנע מהטבלה אנחנו נותנים מתנה לגוי ויש בזה חשש לא תחנם. לא תתן להם חן. דברים בחינם. ואז משתמשים בכלי שאול של גוי.. וכל זה כדי להתרחק מגויים כן? <br>לא זו הדרך...  אם כי המתמטיקה ההלכתית נכונה.. <br>אחת משתיים. <br>או שתטבילו את הקומקום. ואז לתת לו להתייבש היטב. <br><br>דרך שניה שהיא היותר מרווחת וכך אני נוהג. כל כלי שעובד רק עם חיבור לחשמל נחשב מחובר לקרקע ואינו צריך טבילה. בדומה לתנור וכו.</div>
-    </div>
-
   </div>
 </section>
 
@@ -3616,7 +3617,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-6068', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">שלום הרב<br>למה דוד לפני מותו אומר לשלמה לפגוע ביואב?</div>
-      <div class="qa-answer" id="qa-6068-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-6068-a', this)" title="העתק קישור לתשובה">🔗</button>עדיין באווירת תשעה באב. <br>אחת הסיבות לחורבן היא מצווה המופיעה בפרשתנו.  מהי המצווה. ומהי האימרה הקשורה לחורבן ירושלים בהקשר למצווה זו.</div>
+      <div class="qa-answer qa-no-answer" id="qa-6068-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-6068-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-5972" data-cat="cat5" data-msg-idx="5972" data-date="19.07.2026">
@@ -3753,7 +3754,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-5214', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">כלי קרמיקה שמשמש כל השנה לסוכר.<br>ולקפה שחור. בלבד<br>אפשר להעבירו לשימוש בפסח?</div>
-      <div class="qa-answer" id="qa-5214-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5214-a', this)" title="העתק קישור לתשובה">🔗</button>☝️</div>
+      <div class="qa-answer qa-no-answer" id="qa-5214-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5214-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-4818" data-cat="cat5" data-msg-idx="4818" data-date="24.03.2026">
@@ -3857,7 +3858,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-4082', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">ערב טוב הרב, אם עליתי לאוטובוס והמכשיר תיקוף של הנהג לא עובד כך שכל מי שיש לו רב קו פיזי לא צריך לשלם, האם אני צריך לשלם כאשר אני משלם באפליקציה ואני יכול לשלם ?</div>
-      <div class="qa-answer" id="qa-4082-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4082-a', this)" title="העתק קישור לתשובה">🔗</button>ברור שאם אתה רגיל לשלם באפליקציה עליך לשלם מייד. <br>גם אם אתה רגיל לשלם ברב קו ראוי ונכון לתקף בפעם אחרת פעמיים אף על פי שפטור מבחינת החוק</div>
+      <div class="qa-answer qa-no-answer" id="qa-4082-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4082-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-4018" data-cat="cat5" data-msg-idx="4018" data-date="20.12.2025">
@@ -4556,11 +4557,18 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-3056', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">אשכנזים צריכים לנהוג כפי שהרב כתב לעניין תפילת הדרך (שהכל תלוי בסכנה) אך לא לעניין ברכת הגומל (דהיינו שלא מברכים הגומל אם לא בסכנה ממשית/נפל למשכב)? אם כן - מדוע, הרי אמרנו שיש קשר הדדי בין ברכת הגומל לברכת הדרך?</div>
-      <div class="qa-answer" id="qa-3056-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3056-a', this)" title="העתק קישור לתשובה">🔗</button>קשר הדדי אך לא מוחלט. <br>הגומל מברכים לאשכנזים מסכנה שהיית בה ונחלצת ממנה. <br>ואילו תפילת הדרך היא תפילה שנאמרת גם במקום שיש פוטנציאל סכנה. אך אם היא לא קרתה כמו שקורה ברוך ה ברוב הנסיעות אז, אין מה לברך הגומל. <br><br>ואילו הספרדים סוברים שכל נסיעה מחוץ לעיר היא סכנה. גם אם לא הרגשת. ומה שכתוב שארבעה צריכים להודות בא להשמיע לנו שארבעה אלו גם אם לא חשו סכנה בכל זאת צריכים להודות כי זה מין סכנה אובייקטיבית.<br>ולגבי ה72 ד. <br>הפירוש היותר פשוט  בגמרא וממילא בהלכה שלא מדובר כלל על שיעור זמן אלא על מרחק. <br>בגמרא כתוב מהלך פרסה. <br>פרסה זה ארבעה קילומטר. שזו דרך הגמרא לתאר לנו דרך שהיא מחוץ. לעיר. <br>ללכת ארבעה קמ לוקח שבעים ושתיים דקות. <br>אך פשוט שהגמרא התכוונה למרחק. ולטעם שבו. דרך שיש בה מרכיב של מרחק ממקום ישוב. ולא לזמן. כי אז, מגיעים לאבסורדים כמו שראינו לעיל על טיסה פחות משבעים ושתים ד</div>
-      <div class="qa-followup" id="qa-3056-fq1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3056-fq1', this)" title="העתק קישור לשאלת המשך">🔗</button>כלומר, שאשכנזים מברכים הגומל על כל סכנה גם אם אינה מאחת מארבע הדוגמאות בתהלים קז?</div>
-      <div class="qa-followup-answer" id="qa-3056-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3056-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>כן. כך כתב במפורש המשנה,ברורה. שם.<br>למעשה גם מרן מתלבט בזה. <br>כך כתב בסעיף ט. <br><br>הני ארבעה לאו דוקא דהוא הדין למי שנעשה לו נס כגון שנפל עליו כותל או ניצול מדריסת שור ונגיחותיו או שעמד עליו בעיר אריה לטורפו או אם גנבים באו לו או שודדי לילה וניצול מהם וכל כיוצא בזה כולם צריכים לברך הגומל ויש אומרים שאין מברכין הגומל אלא הני ארבעה דוקא וטוב לברך בלא הזכרת שם ומלכות<br><br>לפי כללי מרן סתם ויש אומרים הלכה כסתם. ולכן יש לברך בכל סכנה. ומה שכתב בסוף דבריו שטוב לברך בלי שם ומלכות יש לומר שכתב זאת לדעת היש אומרים שסובר שאין לברך. גם הוא לפחות יאמר את התפילה בלי ברכה. אך דעת מרן עצמו היא מה שהביא בסתם שיש לברך על כל סכנה. <br>וכן הכריעו כדעה הראשונה המגן אברהם והמשנה ברורה שם שהרי כך מסתבר. ולא כהילקוט יוסף<br>חידת רשי לפרשה. והפעם מותר גוגל. שימו לב. זו חידת רשי. לא מספיק להביא את הפסוק אלא יש להבין למה זה קשור לרשי.<br>מנהיג גדול אמר פעם לאשה אחת. <br>'אז את האשה הקטנה שהתחילה את המלחמה הגדולה'<br>מי המנהיג. <br>מי האשה. <br>למה אמר לה. <br>ומה הקשר לרשי על הפרשה</div>
-      <div class="qa-followup" id="qa-3056-fq2"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3056-fq2', this)" title="העתק קישור לשאלת המשך">🔗</button>רש&quot;י על דברים כח ב:<br>&quot;כי תבנה בית חדש&quot; - אם קיימת מצות שלוח הקן סופך לבנות בית חדש ותקיים מצות מעקה שמצוה גוררת מצוה ותגיע לכרם ושדה ולבגדים נאים לכך נסמכו פרשיות הללו<br>לינקולן למחברת הספר 'האוהל של הדוד תום' שהשפיע על המאבק לשחרור העבדים בארה&quot;ב<br>ואולי, להבדיל בן טוב לרשע, קשור לעמלק ש&quot;קפץ לאמבטיה הרותחת וקירר אותה לאחרים&quot;</div>
-      <div class="qa-followup-answer" id="qa-3056-fa2"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3056-fa2', this)" title="העתק קישור לתשובת המשך">🔗</button>🎯🎯<br>דייק עוד ברשי<br>רשי מסביר שמדובר אפילו בעבד  כנעני שברח מחוץ לארץ לארץ. כלומר ממקום שנוהגת בו עבדות באופן כללי למקום שלא נוהגת בו עבדות. <br>עלילת הספר אוהל הדוד תום עוסקת בעניין הזה בדיוק. <br>בעבד, שבורח מאדון ובאלו הרוצים להסגירו. <br>על זה גם פרצה המלחמה. <br>על התעקשות מדינות  הדרום שעבד הבורח למדינות הצפון בהם העבדות אסורה. יוסגר חזרה לדרום. ועל זה הם פרשו והקימו את הקונפדרציה והשאר הסטוריה<br>שימו לב שההיתר להשתמש בגוגל פורש גם כהיתר השתתפות של אנשי הרשימה הצחורה...  שזה בהחלט דרש נאה.</div>
+      <div class="qa-answer qa-no-answer" id="qa-3056-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3056-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
+    </div>
+
+    <div class="qa-item" id="qa-3059" data-cat="cat6" data-msg-idx="3059" data-date="03.09.2025">
+      <span class="qa-date">03.09.2025</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(3059, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-3059', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">כלומר, שאשכנזים מברכים הגומל על כל סכנה גם אם אינה מאחת מארבע הדוגמאות בתהלים קז?</div>
+      <div class="qa-answer" id="qa-3059-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3059-a', this)" title="העתק קישור לתשובה">🔗</button>כן. כך כתב במפורש המשנה,ברורה. שם.<br>למעשה גם מרן מתלבט בזה. <br>כך כתב בסעיף ט. <br><br>הני ארבעה לאו דוקא דהוא הדין למי שנעשה לו נס כגון שנפל עליו כותל או ניצול מדריסת שור ונגיחותיו או שעמד עליו בעיר אריה לטורפו או אם גנבים באו לו או שודדי לילה וניצול מהם וכל כיוצא בזה כולם צריכים לברך הגומל ויש אומרים שאין מברכין הגומל אלא הני ארבעה דוקא וטוב לברך בלא הזכרת שם ומלכות<br><br>לפי כללי מרן סתם ויש אומרים הלכה כסתם. ולכן יש לברך בכל סכנה. ומה שכתב בסוף דבריו שטוב לברך בלי שם ומלכות יש לומר שכתב זאת לדעת היש אומרים שסובר שאין לברך. גם הוא לפחות יאמר את התפילה בלי ברכה. אך דעת מרן עצמו היא מה שהביא בסתם שיש לברך על כל סכנה. <br>וכן הכריעו כדעה הראשונה המגן אברהם והמשנה ברורה שם שהרי כך מסתבר. ולא כהילקוט יוסף<br>חידת רשי לפרשה. והפעם מותר גוגל. שימו לב. זו חידת רשי. לא מספיק להביא את הפסוק אלא יש להבין למה זה קשור לרשי.<br>מנהיג גדול אמר פעם לאשה אחת. <br>'אז את האשה הקטנה שהתחילה את המלחמה הגדולה'<br>מי המנהיג. <br>מי האשה. <br>למה אמר לה. <br>ומה הקשר לרשי על הפרשה</div>
+      <div class="qa-followup" id="qa-3059-fq1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3059-fq1', this)" title="העתק קישור לשאלת המשך">🔗</button>רש&quot;י על דברים כח ב:<br>&quot;כי תבנה בית חדש&quot; - אם קיימת מצות שלוח הקן סופך לבנות בית חדש ותקיים מצות מעקה שמצוה גוררת מצוה ותגיע לכרם ושדה ולבגדים נאים לכך נסמכו פרשיות הללו<br>לינקולן למחברת הספר 'האוהל של הדוד תום' שהשפיע על המאבק לשחרור העבדים בארה&quot;ב<br>ואולי, להבדיל בן טוב לרשע, קשור לעמלק ש&quot;קפץ לאמבטיה הרותחת וקירר אותה לאחרים&quot;</div>
+      <div class="qa-followup-answer" id="qa-3059-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3059-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>🎯🎯<br>דייק עוד ברשי<br>רשי מסביר שמדובר אפילו בעבד  כנעני שברח מחוץ לארץ לארץ. כלומר ממקום שנוהגת בו עבדות באופן כללי למקום שלא נוהגת בו עבדות. <br>עלילת הספר אוהל הדוד תום עוסקת בעניין הזה בדיוק. <br>בעבד, שבורח מאדון ובאלו הרוצים להסגירו. <br>על זה גם פרצה המלחמה. <br>על התעקשות מדינות  הדרום שעבד הבורח למדינות הצפון בהם העבדות אסורה. יוסגר חזרה לדרום. ועל זה הם פרשו והקימו את הקונפדרציה והשאר הסטוריה<br>שימו לב שההיתר להשתמש בגוגל פורש גם כהיתר השתתפות של אנשי הרשימה הצחורה...  שזה בהחלט דרש נאה.</div>
     </div>
 
     <div class="qa-item" id="qa-3073" data-cat="cat6" data-msg-idx="3073" data-date="03.09.2025">
@@ -5379,7 +5387,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-3713', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">ערב טוב הרב, איך מכשירים מיקרוגל שהיה בשימוש של עובדת זרה?<br>ואיך מכשירים את הצלחת זכוכית?</div>
-      <div class="qa-answer" id="qa-3713-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3713-a', this)" title="העתק קישור לתשובה">🔗</button>כמו לפסח. <br>את הצלחת יש להגעיל <br>את המיקרו על ידי כוס עם חומר ניקוי לרבע שעה</div>
+      <div class="qa-answer qa-no-answer" id="qa-3713-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3713-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-3686" data-cat="cat7" data-msg-idx="3686" data-date="08.11.2025">
@@ -5780,7 +5788,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-835', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">ערב טוב הרב, בעזהית אנו חוגגים בר מצווה לבננו בשבת מקץ בבית הארחה. ביחס להדלקת נרות - האם מי שנשאר לו מישהו בבית ידליק עליו בביתו? היכן כדאי להדליק נרות בהנחה שניתן,  במקום החדרים שישנים בהם או בחדר האוכל היכן שמדליקים נרות שבת ? במוצשק האם ניתן במסגרת ההבדלה המוזיקלית להאריך מעט בריקודים ואולי סרטון ...האם יש עניין שמישהו ידליק שם נרות?</div>
-      <div class="qa-answer" id="qa-835-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-835-a', this)" title="העתק קישור לתשובה">🔗</button>חידת רשי לשבת וישב. <br><br>האמא אמרה לבתה -ראית  איזו מתנה יפה אבא קנה לי? הנה היא שם בארון הנכאת.<br><br>מה היא המתנה ומה נמצא בארון הנכאת...</div>
+      <div class="qa-answer qa-no-answer" id="qa-835-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-835-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-790" data-cat="cat7" data-msg-idx="790" data-date="06.12.2024">
@@ -6276,7 +6284,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-4607', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">האם יש איזו תפילה שאומרים לאחר שקרה לך משהו רע כדי להודות לקב״ה כי כל מה שהוא עושה לטובה?</div>
-      <div class="qa-answer" id="qa-4607-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4607-a', this)" title="העתק קישור לתשובה">🔗</button>על זה נתקנה ברכת דיין האמת. או לומר כל מאן דעביד רחמנא הכל לטובה</div>
+      <div class="qa-answer qa-no-answer" id="qa-4607-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4607-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-4599" data-cat="cat8" data-msg-idx="4599" data-date="06.03.2026">
@@ -6316,7 +6324,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-4403', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">קשר הי' על תפילין של יד<br><br>שלום הרב. האם מספיק שתחתית הקשר תיגע במעברתא או שצריך שגם היוד תיגע בקציצה</div>
-      <div class="qa-answer" id="qa-4403-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4403-a', this)" title="העתק קישור לתשובה">🔗</button>תחתית הקשר מספיקה.</div>
+      <div class="qa-answer qa-no-answer" id="qa-4403-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4403-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-4292" data-cat="cat8" data-msg-idx="4292" data-date="20.01.2026">
@@ -6504,7 +6512,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-3024', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">לפי כך יש לומר &quot;לדוד ה' אורי וישעי&quot; בערבית, ולא במנחה ?</div>
-      <div class="qa-answer" id="qa-3024-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3024-a', this)" title="העתק קישור לתשובה">🔗</button>טעיתי בקבוצה.   אבל הרב ניצן שליטא ענה ראשון... מדהים..<br>ראשי תיבות של רש&quot;י היסודוי והחשוב המכוון כנגד ארבע אותיות שם הוויה וקוצו של יוד.. <br>על הפסוק תמים תהיה עם ה' אלהיך. <br>התהלך עימו בתמימות.<br>ותצפה לו.<br>ולא תחקור אחר העתידות.<br>אלא כל מה שיבוא עליך קבל בתמימות. <br>*ואז תהיה עימו ולחלקו*  <br>איזה רש&quot;י.<br>שנזכה...</div>
+      <div class="qa-answer qa-no-answer" id="qa-3024-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3024-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-2931" data-cat="cat8" data-msg-idx="2931" data-date="12.08.2025">
@@ -6618,9 +6626,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-2250', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">שלום הרב<br>האם אפשר להתפלל שמונה עשרה בין זמן הנחת תפילין לנץ בשביל לא להסתחב עם התפילין אחר כך?</div>
-      <div class="qa-answer" id="qa-2250-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-2250-a', this)" title="העתק קישור לתשובה">🔗</button>תלוי מאוד מי השואל ומה הפרטים. באופן כללי אין להתפלל שמונה עשרה לפני הנץ החמה. אלא במקום צורך גדול וכו</div>
-      <div class="qa-followup" id="qa-2250-fq1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-2250-fq1', this)" title="העתק קישור לשאלת המשך">🔗</button>אפשר להניח לפני הנץ, להגיד ברכות, שמע ישראל וכו<br>ואז לעשות שמונה עשרה אחרי הנץ בלי תפילין?<br>שלום הרב <br>אם חבר שלי אכל גלידה חלבית עם כף פרווה ואחרי כמה זמן נזכר שהוא בשרי<br>מותר למישהו אחר לאכול מהכף שלו? האם הכף טרף?</div>
-      <div class="qa-followup-answer" id="qa-2250-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-2250-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>מותר</div>
+      <div class="qa-answer qa-no-answer" id="qa-2250-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-2250-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-2197" data-cat="cat8" data-msg-idx="2197" data-date="11.05.2025">
@@ -6794,15 +6800,6 @@
       <div class="qa-followup-answer" id="qa-935-fa2"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-935-fa2', this)" title="העתק קישור לתשובת המשך">🔗</button>גזל הגוי אסור. <br>ואסור  לגזול.</div>
       <div class="qa-followup" id="qa-935-fq3"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-935-fq3', this)" title="העתק קישור לשאלת המשך">🔗</button>מה דעת הרב בנושא?<br>והאם הרב יודע אם יש רשימת מוצרים שאסורים בעקבות הפסק של הרב אליהו?<br>אנסה להסביר:<br>יש פה שטח הפקר באמצע נחל בשטח הארץ, לפי הבנייה ליד אפשר להבין שזה של ערבים, אבל לא בטוח, יש פירות שהם גדלים על שטח הארץ שלנו, האם זה נקרא גזל?<br>אין איך באמת לדעת האם זה שלהם או לא<br>השאלה היא האם ספק מעשר צריך לעשר או לא...</div>
       <div class="qa-followup-answer" id="qa-935-fa3"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-935-fa3', this)" title="העתק קישור לתשובת המשך">🔗</button>הכל ברור וכתוב. <br>על מה שבהשגחת הארגון הזה אין לסמוך עליו</div>
-    </div>
-
-    <div class="qa-item" id="qa-831" data-cat="cat8" data-msg-idx="831" data-date="17.12.2024">
-      <span class="qa-date">17.12.2024</span>
-      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(831, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
-      <button class="qa-link-btn" onclick="copyQALink('qa-831', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
-      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
-      <div class="qa-question">לא נפגע בכלל רק  מבקש גם לחדד.<br>אני משתדל ליטול כאשר אני לוי יחיד או מעט לויים והרבה כהנים.האם יש עניין ש5 לויים יחזיקו בנטלה בזמן חזרת השץ?<br>או אפילו שניים? לעיתים זה גורם גם לפטפטת ( מדבר רק על עצמי) ויציאה מהתפילה.</div>
-      <div class="qa-answer" id="qa-831-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-831-a', this)" title="העתק קישור לתשובה">🔗</button>ערב טוב. נטילת ידי הכהנים על ידי הלויים מוזכרת בשולחן ערוך סימן קכח ומוקרה קדוש בדברי הזהר פרשת נשא.  וכאמור נפסק להלכה בשולחן ערוך. ולכן יש ללוי להשתדל לזכות במצווה חשובה זו. אמנם עיקר הדין הוא שלוי אחד יטול לכהן ולא כמה לויים. ולכן אם יש ריבוי לווים אין צורך שכולם יצאו. אלא די בלוי אחד לכל כהן. וכמו כן אם המניין מצומצם ובמידה והלוי יצא החוצה לא יהיה מניין- אין לו לצאת.   כל זה ביחס ללווים. <br><br>אך לישראל אין לעשות את חשבונות הלויים , ולהעלות  רק את מי שיצא ליטול ידיים לכהנים וכו . אלא כולם אהובים ברורים ונחמדים. ומעלים לתורה את כולם. ללא יוצא מן הכלל.</div>
     </div>
 
     <div class="qa-item" id="qa-817" data-cat="cat8" data-msg-idx="817" data-date="13.12.2024">
@@ -7197,15 +7194,6 @@
       <div class="qa-followup-answer" id="qa-4705-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4705-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>הדבר הראשון שיהודי צריך לעשות בבוקר זה להתפלל. אם אין ברירה אז אפשר לדחות את התפילה. כמו מי שצריך להמנע מפקקים ובוחר להתפלל במקום העבודה. אך באופן קבוע אין להכניס פעילות גופנית לפני התפילה<br>אין בזה כל בעיה.</div>
     </div>
 
-    <div class="qa-item" id="qa-3972" data-cat="cat9" data-msg-idx="3972" data-date="16.12.2025">
-      <span class="qa-date">16.12.2025</span>
-      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(3972, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
-      <button class="qa-link-btn" onclick="copyQALink('qa-3972', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
-      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
-      <div class="qa-question">שלום הרב,האם מותר להשתמש בחו&quot;ל בתנור</div>
-      <div class="qa-answer" id="qa-3972-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3972-a', this)" title="העתק קישור לתשובה">🔗</button>צריך לנקותו ולהכשירו. <br>כמו לפסח. <br>ותבניות חד פעמיות</div>
-    </div>
-
     <div class="qa-item" id="qa-2219" data-cat="cat9" data-msg-idx="2219" data-date="12.05.2025">
       <span class="qa-date">12.05.2025</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(2219, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
@@ -7472,7 +7460,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-871', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">שלום. <br>בנושא משאירי הפתקים מתחת לחנוכיה בנר שמיני. <br>יש זמן מסויים שאפשר/כדאי לפתוח או שאין בזה עיניים כלל?</div>
-      <div class="qa-answer" id="qa-871-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-871-a', this)" title="העתק קישור לתשובה">🔗</button>החידה לרש&quot;י על הפרשה.. הוראות הפעלה..<br>מטרת החידה השבועית היא לעודד את לימוד  רש&quot;י על הפרשה. ולכן חשבתי שנכון לפתוח אותה לכולם. לא רק לצעירים.. אך יש תנאי אחד בלבד- התשובה צריכה לבוא מתוך עיון בחומש ולא מתוך חיפוש בגוגל או כל חבריו..  בכל מקרה אשתדל שהחידות יהיו כאלו שגוגל לא יכול לעזור.. כדי למנוע יצר הרע.. אבל זה התנאי היחיד- לפתוח חומש לעיין ולמצוא ואז לשלוח את התשובה. <br>והרי החידה לשבוע הזה.<br>במקום אחד רש&quot;י נעזר בציטוט של אחיין  של דוד המלך. מי האחיין? ומה רש&quot;י מסביר באמצעות דבריו?<br>האפשרות הנהוגה והרווחת אצל אחינו הספרדים היא להתפלל ערבית סמוך למנחה ואז להדליק בצאת הכוכבים.  אפשרות שניה היא להתפלל במניין מאוחר יותר . יש עדפיות אם זה המניין הרגיל שלו  ואז זה נחשב קבוע. ואי בזה הקדמת שאינו תדיר [ חנוכה ] על פני התדיר<br>הטוב ביותר הוא להדליק בבית בזמן.. ולשהות חצי שעה ואז ללכת לחברים וכו. או אם אי אפשר - כשחוזרים הבית ה- להדליק בבית יחד עם בני הבית , אפילו רק עם אשתו.  מצוות חנוכה צמודה לבית והיתר ההשתתפות הוא רק באכסנאי שלא חוזר לביתו באותו לילה.<br>כן. צריך טבילה בברכה. כל כלי שבא במגע עם  אוכל  צריך טבילה<br>יש בזה  עניין. סגולה יקרה.   אפשר לפתוח לפני החג, ולשים פתק חדש עם הדברים המצריכים ישועות השנה. בעזרת ה'. רואים בזה ישועות. ובכלל- כל מה שקשור בריבוי אור והדלקה בשמן זית- בחנוכה ובמשך כל השנה בשבת מביא עימו ברכה מרובה</div>
+      <div class="qa-answer qa-no-answer" id="qa-871-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-871-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-856" data-cat="cat10" data-msg-idx="856" data-date="23.12.2024">
@@ -7584,7 +7572,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-442', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">בט' באב, מי יכול לאכול?! וביום הכיפורים, מי צריך לאכול?!</div>
-      <div class="qa-answer" id="qa-442-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-442-a', this)" title="העתק קישור לתשובה">🔗</button>אכן יש, מחמירים לא להכניס, כלל אותיות הקודש לשרותים.  אך מקילים בכל דבר חול<br>אך ודאי אין לקרוא פסוקים או כל דבר קודש</div>
+      <div class="qa-answer qa-no-answer" id="qa-442-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-442-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
   </div>
@@ -8093,15 +8081,6 @@
       <div class="qa-followup-answer" id="qa-5679-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5679-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>מה נחשב מנהג?</div>
     </div>
 
-    <div class="qa-item" id="qa-5695" data-cat="cat16" data-msg-idx="5695" data-date="30.06.2026">
-      <span class="qa-date">30.06.2026</span>
-      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5695, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
-      <button class="qa-link-btn" onclick="copyQALink('qa-5695', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
-      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
-      <div class="qa-question">מדובר על נעלי ריצה שאחרי מרחק מסויים כדאי לא להשתמש בהם לריצות אינטנסיביות וכו.(בעיקר מבחינת פציעות וכו..) יצא והמצב כעת קצת גבולי מבחינת שחיקה לכן כדאי להחליף, מצד שני לא נורא לחכות שלושה שבועות פשוט עדיף.</div>
-      <div class="qa-answer" id="qa-5695-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5695-a', this)" title="העתק קישור לתשובה">🔗</button>היות והצום הוא דרבנן. ניתן ללכת אחר דעת המרילין<br>הצריחים<br>המקיפים<br>המקילים</div>
-    </div>
-
     <div class="qa-item" id="qa-4570" data-cat="cat16" data-msg-idx="4570" data-date="02.03.2026">
       <span class="qa-date">02.03.2026</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(4570, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
@@ -8355,15 +8334,6 @@
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">הרב שלום,<br>לגבי אמירת קדישים בשבת שלפני &quot;יום השנה&quot; (יארצייט), אני מבין שיש הבדל בין אשכנזים לספרדים (?), מה מקור ההבדלים ?</div>
       <div class="qa-answer" id="qa-5308-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5308-a', this)" title="העתק קישור לתשובה">🔗</button>קשה לעמוד על מקור ההבדל. בדרך כלל זה ענינים של קבלה.  מה מועיל לנשמת הנפטר וכו</div>
-    </div>
-
-    <div class="qa-item" id="qa-5238" data-cat="cat18" data-msg-idx="5238" data-date="14.04.2026">
-      <span class="qa-date">14.04.2026</span>
-      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5238, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
-      <button class="qa-link-btn" onclick="copyQALink('qa-5238', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
-      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
-      <div class="qa-question">שלום הרב רציתי לדעת האם לכתחילה ניתן להסתפר בראש חודש או ביום העצמאות אשמח שתתייחס גם לדעת הספרדים ואם ניתן אז גם לדעת האשכנזים</div>
-      <div class="qa-answer" id="qa-5238-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5238-a', this)" title="העתק קישור לתשובה">🔗</button>אתה כל כך קרוב ספי.  אבל לא.</div>
     </div>
 
     <div class="qa-item" id="qa-4467" data-cat="cat18" data-msg-idx="4467" data-date="19.02.2026">
@@ -9219,6 +9189,15 @@
       <div class="qa-answer" id="qa-5729-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5729-a', this)" title="העתק קישור לתשובה">🔗</button>🎯🎯</div>
     </div>
 
+    <div class="qa-item" id="qa-5695" data-cat="cat15" data-msg-idx="5695" data-date="30.06.2026">
+      <span class="qa-date">30.06.2026</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5695, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-5695', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">מדובר על נעלי ריצה שאחרי מרחק מסויים כדאי לא להשתמש בהם לריצות אינטנסיביות וכו.(בעיקר מבחינת פציעות וכו..) יצא והמצב כעת קצת גבולי מבחינת שחיקה לכן כדאי להחליף, מצד שני לא נורא לחכות שלושה שבועות פשוט עדיף.</div>
+      <div class="qa-answer qa-no-answer" id="qa-5695-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5695-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
+    </div>
+
     <div class="qa-item" id="qa-5653" data-cat="cat15" data-msg-idx="5653" data-date="28.06.2026">
       <span class="qa-date">28.06.2026</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5653, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
@@ -9234,7 +9213,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-5624', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">מחרתיים!! 🇮🇱 ואם זה משמח מאוד גם אותנו? 😁</div>
-      <div class="qa-answer" id="qa-5624-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5624-a', this)" title="העתק קישור לתשובה">🔗</button>גם</div>
+      <div class="qa-answer qa-no-answer" id="qa-5624-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5624-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-5615" data-cat="cat15" data-msg-idx="5615" data-date="22.06.2026">
@@ -9364,6 +9343,15 @@
       <div class="qa-answer" id="qa-5334-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5334-a', this)" title="העתק קישור לתשובה">🔗</button>במיוחד אם מדובר על ביני.<br>אחרי לג בעומר</div>
     </div>
 
+    <div class="qa-item" id="qa-5346" data-cat="cat15" data-msg-idx="5346" data-date="26.04.2026">
+      <span class="qa-date">26.04.2026</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5346, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-5346', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">זה ההתקן שיש במעלית שבבית הקהילה?</div>
+      <div class="qa-answer qa-no-answer" id="qa-5346-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5346-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
+    </div>
+
     <div class="qa-item" id="qa-5322" data-cat="cat15" data-msg-idx="5322" data-date="24.04.2026">
       <span class="qa-date">24.04.2026</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5322, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
@@ -9400,6 +9388,15 @@
       <div class="qa-answer" id="qa-5247-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5247-a', this)" title="העתק קישור לתשובה">🔗</button>🎯<br>נו ספי.  תגמור את המצווה<br>פשוט תקרא בלי ניקוד</div>
       <div class="qa-followup" id="qa-5247-fq1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5247-fq1', this)" title="העתק קישור לשאלת המשך">🔗</button>אולי קשור לזה שידו של משה היתה מצורעת כשלג, שהוא לבן מאוד?<br>או לכך שאברהם (מהראשונים) היה עניו כמו עפר ואפר (מכת שחין נעשתה ע&quot;י זריקת פיח כבשן = אפר)<br>ומשה היה עניו עוד יותר - &quot;ונחנו מה כי תלינו עלינו&quot;?</div>
       <div class="qa-followup-answer" id="qa-5247-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5247-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>אין ממשה שפל</div>
+    </div>
+
+    <div class="qa-item" id="qa-5238" data-cat="cat15" data-msg-idx="5238" data-date="14.04.2026">
+      <span class="qa-date">14.04.2026</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(5238, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-5238', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">שלום הרב רציתי לדעת האם לכתחילה ניתן להסתפר בראש חודש או ביום העצמאות אשמח שתתייחס גם לדעת הספרדים ואם ניתן אז גם לדעת האשכנזים</div>
+      <div class="qa-answer qa-no-answer" id="qa-5238-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-5238-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-5209" data-cat="cat15" data-msg-idx="5209" data-date="09.04.2026">
@@ -9586,7 +9583,7 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-4099', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">לא יעבוד אצל כאלו שלא הולכים לישון (או לא יוצאים מהבית) כשיש נרות דולקים... 😃</div>
-      <div class="qa-answer" id="qa-4099-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4099-a', this)" title="העתק קישור לתשובה">🔗</button>חידת בקיאות ואמינות</div>
+      <div class="qa-answer qa-no-answer" id="qa-4099-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-4099-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-3992" data-cat="cat15" data-msg-idx="3992" data-date="18.12.2025">
@@ -9609,6 +9606,15 @@
       <div class="qa-followup-answer" id="qa-3977-fa1"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3977-fa1', this)" title="העתק קישור לתשובת המשך">🔗</button>ברגע שהופרשה חלה ניתן לעשות מה שרוצים</div>
       <div class="qa-followup" id="qa-3977-fq2"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3977-fq2', this)" title="העתק קישור לשאלת המשך">🔗</button>ואם לכתחילה אני רוצה לטגן את כל הבצק האם צריך לעשות עליו הפרשת חלה ?</div>
       <div class="qa-followup-answer" id="qa-3977-fa2"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3977-fa2', this)" title="העתק קישור לתשובת המשך">🔗</button>שאלת הספינג׳<br>לספרדים כאשר מכינים בצק על מנת לטגנו כולו הוא פטור מהפרשת חלה. אך אם מתכוונים  לאפות אפילו חלק קטן  מהבצק אז כל העיסה מתחייבת. <br>לאשכנזים נהגו להפריש בלי ברכה.</div>
+    </div>
+
+    <div class="qa-item" id="qa-3972" data-cat="cat15" data-msg-idx="3972" data-date="16.12.2025">
+      <span class="qa-date">16.12.2025</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(3972, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-3972', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">שלום הרב,האם מותר להשתמש בחו&quot;ל בתנור</div>
+      <div class="qa-answer qa-no-answer" id="qa-3972-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-3972-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-3919" data-cat="cat15" data-msg-idx="3919" data-date="11.12.2025">
@@ -10219,6 +10225,15 @@
       <div class="qa-followup-answer" id="qa-837-fa2"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-837-fa2', this)" title="העתק קישור לתשובת המשך">🔗</button>בניה, בלגו מותרת. הסיבה היא שאין בניה, לסתירה בכלים. ואבני הלגו עשויות לבניה ופירוק. <br>אין בזה הבדל בין קטן לגדול. <br><br>אמנם אם בונים דגם ספציפי ששם מרכיבים אותו פעם אחת ואז מעמידים אותו לתצוגה בזה יש אוסרים משום שזה עשוי לעמידה קבועה ולמרות. שאין בניין לסתירה בכלים אך בכלי מדובק (מוסתקי בלשון הגמרא)  חכמים אסרו</div>
     </div>
 
+    <div class="qa-item" id="qa-815" data-cat="cat15" data-msg-idx="815" data-date="12.12.2024">
+      <span class="qa-date">12.12.2024</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(815, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-815', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">שלום הרב,<br>האם לבנות מעל גיל מצוות מותר לרקוד באולטרה סגול ללא מסכות שמסתירות את הפנים מול גברים?</div>
+      <div class="qa-answer qa-no-answer" id="qa-815-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-815-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
+    </div>
+
     <div class="qa-item" id="qa-784" data-cat="cat15" data-msg-idx="784" data-date="05.12.2024">
       <span class="qa-date">05.12.2024</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(784, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
@@ -10267,7 +10282,25 @@
       <button class="qa-link-btn" onclick="copyQALink('qa-261', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
       <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">לילה טוב הרב<br><br>האם מותר לעלות לקברי צדיקים בלילה?</div>
-      <div class="qa-answer" id="qa-261-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-261-a', this)" title="העתק קישור לתשובה">🔗</button>כן. מותר. לא שמענו איזה הגבלה בדבר. וישראל קדושים בליל לג בעומר ברשבי יוכיחו</div>
+      <div class="qa-answer qa-no-answer" id="qa-261-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-261-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
+    </div>
+
+    <div class="qa-item" id="qa-194" data-cat="cat15" data-msg-idx="194" data-date="13.09.2024">
+      <span class="qa-date">13.09.2024</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(194, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-194', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">יש לנו קומקום שלא כתוב עליו שיוצר בארץ וחשבנו לתת אותו לעובדת של סבתא שלי ולהשאיל ממנה, השאלה שלנו היא אם זה באמת עובד כי בסוף לא ברור עד כמה היא באמת תבין מה רוצים ממנה..</div>
+      <div class="qa-answer qa-no-answer" id="qa-194-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-194-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
+    </div>
+
+    <div class="qa-item" id="qa-114" data-cat="cat15" data-msg-idx="114" data-date="24.08.2024">
+      <span class="qa-date">24.08.2024</span>
+      <a class="qa-raw-link" href="#raw-messages" onclick="showInContext(114, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('qa-114', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
+      <div class="qa-question">שבוע טוב! אשמח לדעת מה מותר ומה אסור לגבי אישה ששרה בנוכחות גברים. תודה</div>
+      <div class="qa-answer qa-no-answer" id="qa-114-a"><button class="qa-link-btn qa-link-btn-inline" onclick="copyQALink('qa-114-a', this)" title="העתק קישור לתשובה">🔗</button>טרם נמצאה תשובה</div>
     </div>
 
     <div class="qa-item" id="qa-26" data-cat="cat15" data-msg-idx="26" data-date="13.08.2024">
@@ -10281,6 +10314,7 @@
 
   </div>
 </section>
+
 
 
 
@@ -54472,7 +54506,7 @@ function filterRawMessages() {
 <!-- END RAW MESSAGES SECTION -->
 
 <div class="footer">
-  שו״ת יחדיו — שאלות ותשובות מאת הרב אייל ורד — 875 שאלות ותשובות
+  שו״ת יחדיו — שאלות ותשובות מאת הרב אייל ורד — 878 שאלות ותשובות
 </div>
 <!-- QA SEARCH SCRIPT -->
 <style>
