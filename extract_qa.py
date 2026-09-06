@@ -10,7 +10,7 @@ import subprocess
 import sys
 from rebuild_raw_section import (
     parse_messages, classify_all_messages, RABBI_SENDERS, get_sender_name,
-    strip_reply_metadata, _parse_ts,
+    strip_reply_metadata, _parse_ts, load_msg_id_timestamps,
 )
 
 RAW_PATH = "/Users/hillelk/Documents/shut-yachdav/raw_messages.txt"
@@ -176,6 +176,27 @@ def extract_qa_pairs(messages, roles, reply_infos=None):
     n = len(messages)
     paired = set()
 
+    # Which message a citation points at is the one thing here that is not a guess:
+    # WhatsApp records the quoted message's id, so it needs no heuristic and must not
+    # be second-guessed by one. Resolve the id to an index and anchor on it. The old
+    # sender-only scan took "the closest earlier question from that person", which is a
+    # different message whenever someone answers a queue out of order.
+    ts_by_msg_id = load_msg_id_timestamps() if reply_infos else {}
+    ts_index = {}
+    for idx, (ts, _, _) in enumerate(messages):
+        ts_index.setdefault(ts, idx)
+
+    def cited_index(rabbi_idx):
+        """Index of the message this rabbi message quotes, or None."""
+        info = reply_infos[rabbi_idx]
+        if not info or not info[1]:
+            return None
+        target_ts = ts_by_msg_id.get(info[1])
+        if target_ts is None:
+            return None
+        j = ts_index.get(target_ts)
+        return j if j is not None and j < rabbi_idx else None
+
     # Phase 1: Reply-linked pairing
     if reply_infos:
         for rabbi_idx in range(n):
@@ -183,15 +204,24 @@ def extract_qa_pairs(messages, roles, reply_infos=None):
                 continue
             reply_sender, _ = reply_infos[rabbi_idx]
 
-            # Find the closest prior שואל message from reply_sender.
-            # If reply_sender is a rabbi, no שואל match → skips automatically.
+            # The cited message itself, when it is somebody's turn rather than the
+            # rabbi's own. A citation outranks the role heuristic: if he answered it,
+            # it was a question, even when it is too short to look like one.
             q_idx = None
-            for j in range(rabbi_idx - 1, -1, -1):
-                if j in paired:
-                    continue
-                if roles[j] == "שואל" and messages[j][1] == reply_sender:
-                    q_idx = j
-                    break
+            cited = cited_index(rabbi_idx)
+            if cited is not None and cited not in paired and roles[cited] in ("שואל", "תגובה"):
+                q_idx = cited
+                reply_sender = messages[cited][1]
+
+            # Fall back to the closest prior שואל from reply_sender — for the exported
+            # history, which predates the id map.
+            if q_idx is None:
+                for j in range(rabbi_idx - 1, -1, -1):
+                    if j in paired:
+                        continue
+                    if roles[j] == "שואל" and messages[j][1] == reply_sender:
+                        q_idx = j
+                        break
 
             if q_idx is None:
                 continue
@@ -621,6 +651,18 @@ def main():
         print(f"UI CHECK FAILED — do not push: {e}", file=sys.stderr)
         subprocess.run(['osascript', '-e', 'display notification '
                         '"Q&A links/report buttons missing — extract_qa.py template regressed" '
+                        'with title "sync-yachdav"'])
+        sys.exit(1)
+
+    # Same contract for the pairing itself: which message an answer quotes is recorded
+    # fact, and resolving it by guesswork once emptied entire days of the site.
+    from test_citation_pairing import verify as verify_citations
+    try:
+        print("Citation check OK:", verify_citations(RAW_PATH))
+    except AssertionError as e:
+        print(f"CITATION CHECK FAILED — do not push: {e}", file=sys.stderr)
+        subprocess.run(['osascript', '-e', 'display notification '
+                        '"Cited answers no longer pair with the question they quote" '
                         'with title "sync-yachdav"'])
         sys.exit(1)
 
