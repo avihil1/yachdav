@@ -9,6 +9,7 @@ Rebuild the raw messages section in the HTML with:
 """
 import re
 import hashlib
+from datetime import datetime
 
 HTML_PATH = "/Users/hillelk/Documents/shut-yachdav/shut-yachdav-qa.html"
 RAW_PATH = "/Users/hillelk/Documents/shut-yachdav/raw_messages.txt"
@@ -19,6 +20,7 @@ RABBI_SENDERS = {
     "הרב אייל ורד",
     "112124500119757",      # Rabbi's phone number (MCP format)
     "+972 54-462-6779",     # Rabbi's phone in export format
+    "108650005811368",      # Rabbi's second phone number (added July 2026)
 }
 
 # Role colors
@@ -222,6 +224,44 @@ def classify_role(text, raw_sender, idx, messages):
 _prev_roles = {}
 
 
+# A riddle is posted as several messages in a row: the "חידת רש״י לפרשת X"
+# header, then the riddle body. Only the header matches RIDDLE_RE, so the body
+# used to stay "הרב" and got paired as the answer to an unrelated question.
+RIDDLE_BODY_GAP_SECONDS = 5 * 60
+
+
+def _parse_ts(ts):
+    for fmt in ('%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M'):
+        try:
+            return datetime.strptime(ts, fmt)
+        except ValueError:
+            pass
+    return None
+
+
+def _mark_riddle_bodies(messages, roles):
+    """Tag the rabbi's own follow-on messages after a חידה header as חידה too.
+
+    Deliberately narrow: same sender, no one else speaking in between, and no
+    more than RIDDLE_BODY_GAP_SECONDS between consecutive messages. Members'
+    guesses stay שואל — real questions get asked inside riddle threads, and
+    tagging the whole thread would delete them from the site.
+    """
+    for i, role in enumerate(roles):
+        if role != "חידה":
+            continue
+        prev_ts = _parse_ts(messages[i][0])
+        for j in range(i + 1, len(messages)):
+            if messages[j][1] != messages[i][1] or roles[j] != "הרב":
+                break
+            ts = _parse_ts(messages[j][0])
+            if prev_ts and ts and (ts - prev_ts).total_seconds() > RIDDLE_BODY_GAP_SECONDS:
+                break
+            roles[j] = "חידה"
+            prev_ts = ts
+    return roles
+
+
 def classify_all_messages(messages):
     """Classify all messages and return list of roles."""
     global _prev_roles
@@ -232,7 +272,7 @@ def classify_all_messages(messages):
         role = classify_role(clean_text, sender, idx, messages)
         _prev_roles[idx] = role
         roles.append(role)
-    return roles
+    return _mark_riddle_bodies(messages, roles)
 
 
 def get_sender_name(raw_sender):

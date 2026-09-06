@@ -4,10 +4,13 @@ Extract ALL Q&A pairs from raw_messages.txt using heuristic role classification.
 Categorize each pair and generate complete HTML category sections.
 """
 import re
+from datetime import date
 import json
+import subprocess
+import sys
 from rebuild_raw_section import (
     parse_messages, classify_all_messages, RABBI_SENDERS, get_sender_name,
-    strip_reply_metadata,
+    strip_reply_metadata, _parse_ts,
 )
 
 RAW_PATH = "/Users/hillelk/Documents/shut-yachdav/raw_messages.txt"
@@ -213,6 +216,11 @@ def extract_qa_pairs(messages, roles, reply_infos=None):
             answer_parts = []
             j = rabbi_idx
             while j < n and roles[j] == "הרב":
+                # Stop before a message the rabbi explicitly aimed at someone
+                # else — when he clears a queue of pending questions in one
+                # burst, each reply-tagged message is its own answer.
+                if j > rabbi_idx and reply_infos[j] and reply_infos[j][0] != reply_sender:
+                    break
                 text = _clean_text(messages[j][2])
                 if text and text != "[media]":
                     answer_parts.append(text)
@@ -274,19 +282,27 @@ def extract_qa_pairs(messages, roles, reply_infos=None):
         if i >= n or roles[i] != "הרב" or i in paired:
             continue
 
+        # Proximity pairing has no idea whether this rabbi message is actually
+        # a reply — if it arrived long after the question, it belongs to
+        # something else. Publish the question with no answer instead of a wrong
+        # one. (Phase 1 is exempt: WhatsApp reply metadata is authoritative.)
+        answer_stale = _too_late_to_be_an_answer(question_ts, messages[i][0])
+
         answer_parts = []
         while i < n and roles[i] == "הרב" and i not in paired:
             ts, sender, text = messages[i]
             clean = _clean_text(text)
             if clean and clean != "[media]":
                 answer_parts.append(clean)
+            if answer_stale:
+                break          # leave it unpaired for whoever it belongs to
             i += 1
 
         if not answer_parts:
             continue
 
         question_text = "\n".join(question_parts)
-        answer_text = "\n".join(answer_parts)
+        answer_text = "" if answer_stale else "\n".join(answer_parts)
 
         if len(question_text.replace("[media]", "").strip()) < 5:
             continue
@@ -302,7 +318,7 @@ def extract_qa_pairs(messages, roles, reply_infos=None):
 
         # Follow-up Q&A in the same conversation
         followup_count = 0
-        while i < n and followup_count < 3:
+        while i < n and followup_count < 3 and not answer_stale:
             j = i
             while j < n and (roles[j] == "תגובה" or j in paired):
                 j += 1
@@ -358,6 +374,19 @@ def _is_close_in_time(date1, date2, ts1, ts2):
     return date1 == date2
 
 
+# Longest gap we'll believe for a proximity-paired answer. Audit of the full
+# history found gaps up to 718h (30 days) — those were questions nobody
+# answered, glued to whatever the rabbi happened to say next.
+MAX_ANSWER_GAP_HOURS = 6
+
+
+def _too_late_to_be_an_answer(question_ts, answer_ts):
+    q, a = _parse_ts(question_ts), _parse_ts(answer_ts)
+    if not q or not a:
+        return question_ts[:10] != answer_ts[:10]
+    return (a - q).total_seconds() > MAX_ANSWER_GAP_HOURS * 3600
+
+
 def escape_html(text):
     return (text
         .replace('&', '&amp;')
@@ -371,6 +400,21 @@ def format_date(yyyy_mm_dd):
     """Convert YYYY-MM-DD to DD.MM.YYYY"""
     parts = yyyy_mm_dd.split('-')
     return f"{parts[2]}.{parts[1]}.{parts[0]}"
+
+HEB_MONTHS = {1: "ינואר", 2: "פברואר", 3: "מרץ", 4: "אפריל", 5: "מאי", 6: "יוני",
+              7: "יולי", 8: "אוגוסט", 9: "ספטמבר", 10: "אוקטובר", 11: "נובמבר", 12: "דצמבר"}
+
+
+def format_month(yyyy_mm_dd):
+    """Convert YYYY-MM-DD to a Hebrew 'month year' label."""
+    year, month, _ = yyyy_mm_dd.split('-')
+    return f"{HEB_MONTHS[int(month)]} {year}"
+
+
+def inline_link(anchor, title):
+    """Small 🔗 copy-link button placed inside an answer/followup block."""
+    return (f'<button class="qa-link-btn qa-link-btn-inline" '
+            f'onclick="copyQALink(\'{anchor}\', this)" title="{title}">🔗</button>')
 
 
 def build_qa_html(qa_pairs_by_cat):
@@ -407,18 +451,26 @@ def build_qa_html(qa_pairs_by_cat):
             a_html = escape_html(qa["answer"])
             msg_idx = qa.get("msg_idx", 0)
 
-            item = f'''    <div class="qa-item">
+            anchor = f'qa-{msg_idx}'
+            # Proximity pairing rejected the candidate answer as too late — say so
+            # rather than publishing an answer that belongs to another question.
+            a_class = "qa-answer" if a_html else "qa-answer qa-no-answer"
+            a_html = a_html or "טרם נמצאה תשובה"
+
+            item = f'''    <div class="qa-item" id="{anchor}" data-cat="{cat_id}" data-msg-idx="{msg_idx}" data-date="{date_str}">
       <span class="qa-date">{date_str}</span>
       <a class="qa-raw-link" href="#raw-messages" onclick="showInContext({msg_idx}, true)" title="צפה בהודעה המקורית בהקשר המלא">📜 הודעה מקורית</a>
+      <button class="qa-link-btn" onclick="copyQALink('{anchor}', this)" title="העתק קישור ישיר לשאלה זו">🔗 קישור</button>
+      <button class="qa-feedback-btn" onclick="openFeedback(this)" title="דווח על שגיאה בסיווג">⚙️ דיווח</button>
       <div class="qa-question">{q_html}</div>
-      <div class="qa-answer">{a_html}</div>'''
+      <div class="{a_class}" id="{anchor}-a">{inline_link(f'{anchor}-a', 'העתק קישור לתשובה')}{a_html}</div>'''
 
-            for fu in qa.get("followups", []):
+            for n, fu in enumerate(qa.get("followups", []), 1):
                 fu_q = escape_html(fu["question"])
                 fu_a = escape_html(fu["answer"])
                 item += f'''
-      <div class="qa-followup">{fu_q}</div>
-      <div class="qa-followup-answer">{fu_a}</div>'''
+      <div class="qa-followup" id="{anchor}-fq{n}">{inline_link(f'{anchor}-fq{n}', 'העתק קישור לשאלת המשך')}{fu_q}</div>
+      <div class="qa-followup-answer" id="{anchor}-fa{n}">{inline_link(f'{anchor}-fa{n}', 'העתק קישור לתשובת המשך')}{fu_a}</div>'''
 
             item += '\n    </div>'
             items.append(item)
@@ -448,11 +500,27 @@ def update_html(toc_html, sections_html, total_qa, active_cats, first_date, last
     with open(HTML_PATH, 'r', encoding='utf-8') as f:
         html = f.read()
 
+    # The head survives regeneration, so inject the unanswered-state style once.
+    if '.qa-no-answer' not in html:
+        html = html.replace('</style>', '''
+  .qa-no-answer {
+    background: transparent;
+    border-right-color: #c9c2b4;
+    color: #8a8375;
+    font-style: italic;
+  }
+
+  .qa-no-answer::before {
+    content: 'תשובה:';
+    color: #8a8375;
+  }
+</style>''', 1)
+
     # Update header date range
     html = re.sub(
         r'<div class="date-range">.*?</div>',
-        f'<div class="date-range">תקופה: אוגוסט 2024 &ndash; אפריל 2026 &nbsp;|&nbsp; '
-        f'{total_qa} שאלות ותשובות &nbsp;|&nbsp; עדכון אחרון: {format_date(last_date)}</div>',
+        f'<div class="date-range">תקופה: {format_month(first_date)} &ndash; {format_month(last_date)} &nbsp;|&nbsp; '
+        f'{total_qa} שאלות ותשובות &nbsp;|&nbsp; עדכון אחרון: {format_date(date.today().isoformat())}</div>',
         html
     )
 
@@ -543,6 +611,18 @@ def main():
     # Update the HTML file
     update_html(toc_html, sections_html, total_qa, active_cats, first_date, last_date)
     print(f"\nUpdated HTML with {total_qa} Q&A pairs across {len(active_cats)} categories")
+
+    # Refuse to leave a file whose per-Q&A links / report buttons regressed —
+    # this regeneration rewrites every item, so a template change can wipe them.
+    from test_qa_links import verify
+    try:
+        print("UI check OK:", verify(HTML_PATH))
+    except AssertionError as e:
+        print(f"UI CHECK FAILED — do not push: {e}", file=sys.stderr)
+        subprocess.run(['osascript', '-e', 'display notification '
+                        '"Q&A links/report buttons missing — extract_qa.py template regressed" '
+                        'with title "sync-yachdav"'])
+        sys.exit(1)
 
 
 if __name__ == '__main__':
