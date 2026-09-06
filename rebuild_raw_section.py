@@ -9,6 +9,7 @@ Rebuild the raw messages section in the HTML with:
 """
 import re
 import hashlib
+import sqlite3
 from datetime import datetime
 
 HTML_PATH = "/Users/hillelk/Documents/shut-yachdav/shut-yachdav-qa.html"
@@ -20,8 +21,11 @@ RABBI_SENDERS = {
     "הרב אייל ורד",
     "112124500119757",      # Rabbi's phone number (MCP format)
     "+972 54-462-6779",     # Rabbi's phone in export format
-    "108650005811368",      # Rabbi's second phone number (added July 2026)
 }
+# 108650005811368 was in this set from July 2026 as "the rabbi's second phone". It is
+# not: it posts 6 messages here and ~3000 in a private chat — it is this account's own
+# id, which chats.name had stamped on 147 @lid rows, so every sender resolved to it and
+# the whole group looked like the rabbi. Whitelisting it made that permanent.
 
 # Role colors
 ROLE_COLORS = {
@@ -106,6 +110,25 @@ RABBI_CONTINUATION_RE = re.compile(
 
 # WhatsApp reply metadata prefix: [Reply to <sender> (msg <msg_id>)]
 REPLY_META_RE = re.compile(r'^\[Reply to (\S+) \(msg ([^)]+)\)\]\s*')
+
+
+BRIDGE_DB = "/Users/hillelk/Source/whatsapp-mcp/whatsapp-bridge/store/messages.db"
+CHAT_JID = "120363300957623688@g.us"
+
+
+def load_msg_id_timestamps():
+    """Map WhatsApp message id → 'YYYY-MM-DD HH:MM:SS', for exact reply resolution.
+
+    Read-only, and best-effort: with no DB the caller falls back to the sender scan.
+    """
+    try:
+        conn = sqlite3.connect(f"file:{BRIDGE_DB}?mode=ro", uri=True)
+        rows = conn.execute(
+            "SELECT id, timestamp FROM messages WHERE chat_jid = ?", (CHAT_JID,)).fetchall()
+        conn.close()
+        return {mid: str(ts)[:19].replace("T", " ") for mid, ts in rows}
+    except sqlite3.Error:
+        return {}
 
 
 def strip_reply_metadata(text):
@@ -353,6 +376,17 @@ def build_raw_section(messages):
     for idx, (ts, raw_sender, text) in enumerate(messages):
         sender_msgs.setdefault(raw_sender, []).append(idx)
 
+    # Reply target by message id. The raw line carries the quoted message's id, but
+    # resolution used to walk back to the closest earlier message from that sender,
+    # which lands on the wrong message whenever someone replies to anything but the
+    # last one — 110 of 361 replies pointed at a single message. The id→timestamp map
+    # comes from the bridge DB; the sender scan below stays as the fallback for
+    # messages that predate it (the exported history).
+    ts_index = {}
+    for idx, (ts, _, _) in enumerate(messages):
+        ts_index.setdefault(ts, idx)
+    ts_by_msg_id = load_msg_id_timestamps()
+
     # Build message cards
     msg_cards = []
     for idx, (ts, raw_sender, text) in enumerate(messages):
@@ -382,8 +416,13 @@ def build_raw_section(messages):
         reply_html = ""
         if reply_sender:
             reply_target = None
+            # Exact: the id the quoted message actually carries.
+            if reply_msg_id:
+                target_ts = ts_by_msg_id.get(reply_msg_id)
+                if target_ts is not None:
+                    reply_target = ts_index.get(target_ts)
             reply_name = get_sender_name(reply_sender)
-            for candidate_sender, candidate_indices in sender_msgs.items():
+            for candidate_sender, candidate_indices in (() if reply_target is not None else sender_msgs.items()):
                 if candidate_sender == reply_sender or get_sender_name(candidate_sender) == reply_name:
                     for ci in reversed(candidate_indices):
                         if ci < idx:
